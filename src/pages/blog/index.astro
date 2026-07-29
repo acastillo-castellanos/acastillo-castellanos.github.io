@@ -9,18 +9,27 @@ const posts = (await getCollection('blog', ({ data }) => !data.draft)).sort(
 ---
 
 <Base title="Blog">
-  <h1>Blog</h1>
-  <ul>
+  <h1 class="text-3xl font-semibold tracking-tight">Blog</h1>
+  <div class="mt-8 space-y-8">
     {
       posts.map((post) => (
-        <li>
-          <a href={withBase(`/blog/${post.id}/`)}>{post.data.title}</a> —{' '}
-          <time datetime={post.data.date.toISOString()}>
-            {post.data.date.toISOString().slice(0, 10)}
-          </time>
-          <p>{post.data.description}</p>
-        </li>
+        <div>
+          <a
+            href={withBase(`/blog/${post.id}/`)}
+            class="text-ink hover:text-accent font-medium no-underline"
+          >
+            {post.data.title}
+          </a>
+          <p class="text-ink-muted mt-1 text-sm">
+            <time datetime={post.data.date.toISOString()}>
+              {post.data.date.toISOString().slice(0, 10)}
+            </time>
+            {post.data.tags.length > 0 &&
+              post.data.tags.map((tag) => <span> #{tag}</span>)}
+          </p>
+          <p class="mt-1 max-w-prose">{post.data.description}</p>
+        </div>
       ))
     }
-  </ul>
+  </div>
 </Base>

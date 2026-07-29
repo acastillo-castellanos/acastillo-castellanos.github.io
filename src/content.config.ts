@@ -21,6 +21,7 @@ const publications = defineCollection({
     year: z.number(),
     doi: z.string().optional(),
     pdf: z.string().optional(),
+    hal: z.string().optional(),
   }),
 });
 

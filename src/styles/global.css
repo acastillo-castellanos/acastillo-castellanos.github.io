@@ -55,3 +55,21 @@ a:focus-visible {
     transition: none !important;
   }
 }
+
+.prose-custom {
+  --tw-prose-body: var(--ink);
+  --tw-prose-headings: var(--ink);
+  --tw-prose-bold: var(--ink);
+  --tw-prose-links: var(--accent);
+  --tw-prose-code: var(--ink);
+  --tw-prose-quotes: var(--ink-muted);
+  --tw-prose-hr: var(--rule);
+  --tw-prose-th-borders: var(--rule);
+  --tw-prose-td-borders: var(--rule);
+}
+
+.katex-display {
+  overflow-x: auto;
+  overflow-y: hidden;
+  margin-block: 1.5em;
+}
