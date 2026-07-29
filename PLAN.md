@@ -114,7 +114,7 @@ Commit: `feat: scaffold Astro + Tailwind with dual-host config`
 
 ---
 
-## Phase 3 — Content architecture
+## Phase 3 — Content architecture ✅ COMPLETE (2026-07-29)
 
 ### 3.1 Site-wide config data
 
@@ -122,15 +122,15 @@ Create `src/data/site.ts`:
 ```ts
 export const SITE = {
   title: 'Andrés Castillo-Castellanos',
-  description: 'Research scientist in fluid dynamics.',
+  description: 'Research scientist in fluid dynamics',
   author: 'Andrés Castillo-Castellanos',
   email: 'andres.castillo.castellanos@proton.me',
   location: 'Greater Paris, France',
   links: {
     github: 'https://github.com/acastillo-castellanos',
     // The following are placeholders — user must fill real IDs later:
-    orcid: 'https://orcid.org/XXXX-XXXX-XXXX-XXXX',
-    scholar: 'https://scholar.google.com/citations?user=XXXX',
+    orcid: 'https://orcid.org/0000-0003-2175-324X',
+    scholar: 'https://scholar.google.com/citations?user=Mmj17fMAAAAJ',
   },
 };
 ```

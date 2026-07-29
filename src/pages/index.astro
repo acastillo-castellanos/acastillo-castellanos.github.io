@@ -1,17 +1,21 @@
 ---
-
+import Base from '../layouts/Base.astro';
+import { SITE } from '../data/site';
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<Base>
+  <h1>{SITE.title}</h1>
+  <p>Research Engineer | PhD in Fluid Mechanics</p>
+  <p>
+    Mechanical Engineer with a doctorate in fluid dynamics and over seven years
+    of research experience. Specializing in modelling and simulation of heat
+    transfer, vortex, and two-phase flow. Proficient in numerical methods, data
+    analysis, visualization, scientific computing &amp; HPC.
+  </p>
+  <ul>
+    <li><a href={SITE.links.github}>GitHub</a></li>
+    <li><a href={SITE.links.orcid}>ORCID</a></li>
+    <li><a href={SITE.links.scholar}>Google Scholar</a></li>
+    <li><a href={`mailto:${SITE.email}`}>{SITE.email}</a></li>
+  </ul>
+</Base>

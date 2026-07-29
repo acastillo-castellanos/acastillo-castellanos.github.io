@@ -1,0 +1,26 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../layouts/Base.astro';
+
+const publications = (await getCollection('publications')).sort(
+  (a, b) => b.data.year - a.data.year,
+);
+---
+
+<Base title="Publications">
+  <h1>Publications</h1>
+  <ul>
+    {
+      publications.map(({ data }) => (
+        <li>
+          {data.authors.join(', ')} ({data.year}). <em>{data.title}</em>.{' '}
+          {data.journal}.
+          {data.doi && (
+            <a href={`https://doi.org/${data.doi}`}>doi:{data.doi}</a>
+          )}
+          {data.pdf && <a href={data.pdf}>[PDF]</a>}
+        </li>
+      ))
+    }
+  </ul>
+</Base>
