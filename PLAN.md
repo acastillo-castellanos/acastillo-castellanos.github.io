@@ -54,7 +54,7 @@ named `<username>.github.io`.
 
 ---
 
-## Phase 2 — Scaffold Astro + Tailwind
+## Phase 2 — Scaffold Astro + Tailwind ✅ COMPLETE (2026-07-29)
 
 1. Pin Node (any current LTS ≥ 20):
    ```bash
