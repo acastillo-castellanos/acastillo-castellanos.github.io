@@ -198,9 +198,10 @@ never behind text.
           poster={withBase('/media/hero-poster.webp')}
           src={withBase('/media/hero.mp4')}></video>
    ```
-3. Reduced motion: inside `@media (prefers-reduced-motion: reduce)`, hide the
-   video and show the poster image instead (render both elements; toggle with
-   CSS only).
+3. Reduced motion / reduced data: inside `@media (prefers-reduced-motion: reduce)`
+   — and, where supported, `(prefers-reduced-data: reduce)` — hide the video
+   and show the poster image instead (render both elements; toggle with CSS
+   only).
 4. Optional pause button is the only JS allowed (a few lines, progressive
    enhancement — the page must work without it).
 
@@ -231,6 +232,13 @@ OG-image generation, and any restyling of PyVista/model-viewer embeds
   consent-exemption-configured self-hosted Matomo, never Google Analytics.
 - **DSFR** (Système de Design de l'État): its license restricts use to French
   state sites — do **not** adopt it here.
+- **RGESN** (DINUM eco-design referential, 2024, 78 criteria): a static,
+  no-tracker, self-hosted-assets site already satisfies the bulk of it. The
+  criteria that remain actionable here: serve images as WebP/AVIF at display
+  size (home portrait, D2; hero poster, D5), keep the hero video ≤ 3 MB and
+  honor `prefers-reduced-data` (D5), WOFF2-only subset fonts (Fontsource
+  default, D0), and no client-side JS beyond progressive enhancement —
+  already a plan rule.
 - **Science ouverte**: ORCID is the pivot researcher ID (already in
   `site.ts`); the `hal` publication field (D3) links open-access HAL
   versions. Consider creating an idHAL and linking it to ORCID (user action,
