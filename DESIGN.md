@@ -24,16 +24,16 @@ the site is mostly text and math.
 
 1. Install:
    ```bash
-   npm install @tailwindcss/typography @fontsource-variable/inter
+   npm install @tailwindcss/typography @fontsource-variable/google-sans-flex
    ```
 2. Rewrite `src/styles/global.css`:
    ```css
    @import 'tailwindcss';
    @plugin '@tailwindcss/typography';
-   @import '@fontsource-variable/inter';
+   @import '@fontsource-variable/google-sans-flex';
 
    @theme {
-     --font-sans: 'Inter Variable', ui-sans-serif, system-ui, sans-serif;
+     --font-sans: 'Google Sans Flex Variable', ui-sans-serif, system-ui, sans-serif;
      --color-accent-600: oklch(0.52 0.1 195);  /* teal, light-mode links */
      --color-accent-400: oklch(0.72 0.1 195);  /* teal, dark-mode links */
    }
@@ -60,10 +60,10 @@ the site is mostly text and math.
    `text-ink-muted`, `text-accent`, `border-rule`, `bg-bg-subtle` exist.
    Use those utility names everywhere in later phases.
 
-**Done when:** build passes; the site renders in Inter on an off-white
+**Done when:** build passes; the site renders in Google Sans Flex on an off-white
 background, and switching the OS to dark mode flips it to a dark background
 with light text (no toggle anywhere).
-Commit: `style: design tokens, Inter, automatic dark mode`
+Commit: `style: design tokens, Google Sans Flex, automatic dark mode`
 
 ---
 
