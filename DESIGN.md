@@ -253,6 +253,62 @@ Commit: `chore: pin actions, dependabot, scoped permissions, meta CSP`
 
 ---
 
+## Phase D7 — Bilingual EN/FR (separate track; exempt from the "styling only, no route changes" rule)
+
+Decision: English stays at the **root** (every existing URL keeps working),
+French lives under **`/fr/`**. Translate only the low-churn pages — home and
+CV. The blog stays single-language per post; publications YAML is
+language-neutral (only page chrome gets translated later if ever needed).
+No automatic redirect from browser language or IP — readers choose via a
+visible switcher. Labels are text (`FR` / `EN`), never flags.
+
+1. **Config** — in `astro.config.mjs`:
+   ```js
+   i18n: {
+     locales: ['en', 'fr'],
+     defaultLocale: 'en',
+     routing: { prefixDefaultLocale: false, fallbackType: 'redirect' },
+     fallback: { fr: 'en' },
+   }
+   ```
+   With `fallback`, untranslated `/fr/…` routes pre-generate as redirects to
+   the English page — so `/fr/blog/` etc. never 404 while untranslated.
+   Also pass the i18n option to `sitemap()` (`i18n: { defaultLocale: 'en',
+   locales: { en: 'en', fr: 'fr' } }`).
+2. **UI strings** — `src/i18n/ui.ts`: a `ui = { en: {…}, fr: {…} }` dictionary
+   for nav labels (About / À propos, Publications, Blog, CV), footer text,
+   and the skip-link label, plus a tiny `t(lang, key)` helper. No i18n
+   library.
+3. **Base.astro** — accept a `lang` prop (default `'en'`): set
+   `<html lang={lang}>` (RGAA 8.3), render nav/footer through the
+   dictionary, and add the language switcher to the header — a text link
+   `FR` / `EN` pointing at the **equivalent page** (each translated page
+   passes its counterpart's path; use `getRelativeLocaleUrl()` from
+   `astro:i18n`, which respects `base`, or keep `withBase()` —
+   consistently one of the two). Pages that exist in both languages emit
+   `<link rel="alternate" hreflang>` pairs plus `x-default` → English.
+4. **French pages** — `src/pages/fr/index.astro` and `src/pages/fr/cv.astro`.
+   Draft the French text by translating the existing English content, and
+   mark both files with a `<!-- TODO: French wording to be reviewed by
+   Andrés -->` comment — the bio and CV are the author's own words, so the
+   user validates the phrasing.
+5. **Blog language metadata** — add `lang: z.enum(['en', 'fr']).default('en')`
+   to the blog schema in `src/content.config.ts`; the post page passes it to
+   `Base` so each post's `<html lang>` is correct. Inline foreign phrases in
+   a page get `<span lang="…">` (RGAA 8.7) — editorial habit, note it in the
+   README's blog how-to.
+6. **README** — short "Adding a translated page" section (drop a file under
+   `src/pages/fr/`, pass `lang="fr"` and the counterpart path to `Base`).
+
+**Done when:** build passes; `/` and `/fr/` both render with the correct
+`lang` attribute and translated nav; the switcher on home and CV links
+between language equivalents (not to the other homepage); `/fr/blog/`
+redirects to `/blog/`; hreflang pairs present on translated pages; a
+`BASE_PATH=/testbase/` build keeps every locale URL under the prefix.
+Commit: `feat: bilingual EN/FR — i18n config, French home and CV, language switcher`
+
+---
+
 ## Out of scope
 
 Design toggles/JS theming, blog pagination, search, comments, analytics,
