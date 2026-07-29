@@ -158,7 +158,7 @@ Commit: `style: blog and publications`
 
 ---
 
-## Phase D4 — CV, print, polish, privacy fix
+## Phase D4 — CV, print, polish, privacy fix ✅ done (`b0c5469`)
 
 1. **CV** (`src/pages/cv.astro`): section headings with a thin rule
    (`border-b border-rule`); each experience entry as a grid — dates/place in
