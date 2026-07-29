@@ -285,7 +285,7 @@ Commit: `ci: GitHub Pages + GitLab Pages (plmlab) pipelines`
 
 ---
 
-## Phase 5 — Academic extras + README
+## Phase 5 — Academic extras + README ✅ COMPLETE (2026-07-29)
 
 1. **3D model embed component** `src/components/ModelViewer.astro`: wraps Google's
    `<model-viewer>` web component. Load the library with

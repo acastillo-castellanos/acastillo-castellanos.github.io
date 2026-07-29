@@ -16,3 +16,13 @@ $$ \partial_t \mathbf{u} + (\mathbf{u}\cdot\nabla)\mathbf{u} = -\nabla p + \nu \
 
 If the equation above shows as typeset math rather than raw `$$`, the
 remark-math + rehype-katex pipeline is working.
+
+<!--
+3D model embed example (requires converting this post to .mdx and committing
+a .glb under public/models/ — large meshes should go through Git LFS):
+
+import ModelViewer from '../../components/ModelViewer.astro';
+
+<ModelViewer src="/models/example.glb" alt="Example 3D model" />
+-->
+
