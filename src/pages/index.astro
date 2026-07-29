@@ -26,6 +26,38 @@ const links = [
   { href: SITE.links.scholar, label: 'Google Scholar', icon: icons.scholar },
   { href: SITE.links.hal, label: 'HAL', icon: icons.hal },
 ];
+
+// TODO(andres): fill in your real research interests. One short phrase as
+// the title, one sentence of description. Add/remove entries freely.
+const researchInterests = [
+  {
+    title: 'Interest title',
+    description: 'One-sentence description of this research interest.',
+  },
+  {
+    title: 'Interest title',
+    description: 'One-sentence description of this research interest.',
+  },
+];
+
+// TODO(andres): fill in your real research projects. `link` and `funding`
+// are optional — omit the key (not just leave it empty) to hide that part.
+const researchProjects = [
+  {
+    title: 'Project title',
+    period: '2023–present',
+    description: 'One or two sentences describing the project and your role.',
+    funding: 'Funding body / grant name',
+    link: 'https://example.org',
+  },
+  {
+    title: 'Project title',
+    period: '2020–2023',
+    description: 'One or two sentences describing the project and your role.',
+    funding: 'Funding body / grant name',
+    link: undefined,
+  },
+];
 ---
 
 <Base>
@@ -46,13 +78,48 @@ const links = [
       <p class="text-ink-muted mt-1">Research Scientist in Fluid Mechanics</p>
     </div>
   </div>
-  <p class="mt-6 max-w-prose">
+  <h2 class="text-ink mt-12 text-xl font-semibold tracking-tight">About</h2>
+  <p class="mt-3 max-w-prose">
     Mechanical Engineer with a doctorate in fluid dynamics and over seven years
     of research experience. Specializing in modelling and simulation of heat
     transfer, vortex, and two-phase flow. Proficient in numerical methods, data
     analysis, visualization, scientific computing &amp; HPC.
   </p>
-  <ul class="mt-8 flex flex-wrap gap-x-6 gap-y-3 pl-0">
+
+  <h2 class="text-ink mt-12 text-xl font-semibold tracking-tight">Research interests</h2>
+  <ul class="mt-3 space-y-3 pl-0">
+    {
+      researchInterests.map((item) => (
+        <li class="list-none">
+          <span class="text-ink font-medium">{item.title}</span>
+          <span class="text-ink-muted"> — {item.description}</span>
+        </li>
+      ))
+    }
+  </ul>
+
+  <h2 class="text-ink mt-12 text-xl font-semibold tracking-tight">Research projects</h2>
+  <ul class="mt-3 space-y-6 pl-0">
+    {
+      researchProjects.map((project) => (
+        <li class="list-none">
+          <div class="flex flex-wrap items-baseline gap-x-3">
+            <span class="text-ink font-medium">{project.title}</span>
+            <span class="text-ink-muted text-sm">{project.period}</span>
+          </div>
+          <p class="text-ink-muted mt-1 max-w-prose">{project.description}</p>
+          {project.funding && <p class="text-ink-muted mt-1 text-sm">{project.funding}</p>}
+          {project.link && (
+            <a href={project.link} class="text-accent mt-1 inline-block text-sm">
+              {project.link}
+            </a>
+          )}
+        </li>
+      ))
+    }
+  </ul>
+
+  <ul class="mt-12 flex flex-wrap gap-x-6 gap-y-3 pl-0">
     {
       links.map((link) => (
         <li class="list-none">
