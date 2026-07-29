@@ -1,86 +1,171 @@
 ---
 import Base from '../layouts/Base.astro';
 import { SITE } from '../data/site';
+
+const experience = [
+  {
+    role: 'Research Fellow, Centre Borelli UMR 9010',
+    place: 'École Normale Supérieure Paris-Saclay, Greater Paris, France',
+    period: '2022–2025',
+    bullets: [
+      'Developed phenomenological models of the interaction between surface waves and internal stratification using experiments, simulations, and PINNs.',
+      'Devised a novel approach to study two non-miscible fluids under intense horizontal vibrations ("frozen wave" instability) using experiments and simulations.',
+    ],
+  },
+  {
+    role: 'Research Fellow, IRPHÉ UMR 7342',
+    place: 'CNRS/Aix-Marseille Université, Marseille, France',
+    period: '2019–2022',
+    bullets: [
+      'Developed simplified models to study the wake of an asymmetric rotor in good agreement with experimental data.',
+      'Proposed an approach to study rotor wakes with twin tip vortices on the Vortex Filament Method (VFM).',
+    ],
+  },
+];
+
+const industry = [
+  {
+    role: 'Project Engineer',
+    place: 'Tiger-Sepam / SAEG Engineering Group / BG; Cartagena, Bogotá & Barrancabermeja, Colombia',
+    period: '2009–2011',
+    bullets: [
+      'Executed phase A and prepared phases B/B1 for the Cartagena Refinery Expansion Project.',
+      'Assisted in bidding, tendering, planning, and execution of HVAC, energy recovery, and automation projects.',
+    ],
+  },
+];
+
+const education = [
+  { degree: 'PhD in Fluid Mechanics', place: 'University of Paris VI (UPMC), Paris, France', period: '2017' },
+  { degree: 'MSc in Energetics & Environment', place: 'ENSAM ParisTech, Paris, France', period: '2013' },
+];
 ---
 
 <Base title="CV">
-  <h1>Curriculum Vitae</h1>
-  <p>
+  <h1 class="text-3xl font-semibold tracking-tight">Curriculum Vitae</h1>
+  <p class="text-ink-muted mt-3">
     Andrés Castillo · Research Engineer | PhD in Fluid Mechanics<br />
     {SITE.email} · {SITE.location}
   </p>
 
-  <h2>Profile</h2>
-  <p>
+  <h2 class="border-rule text-ink mt-10 border-b pb-1 text-lg font-semibold tracking-tight">
+    Profile
+  </h2>
+  <p class="mt-3 max-w-prose">
     Mechanical Engineer with a doctorate in fluid dynamics and over seven years
     of research experience. Specializing in modelling and simulation of heat
     transfer, vortex, and two-phase flow. Proficient in numerical methods, data
     analysis, visualization, scientific computing &amp; HPC.
   </p>
 
-  <h2>Skills</h2>
-  <h3>Soft</h3>
-  <ul>
-    <li>Adaptability and Learning Agility</li>
-    <li>Creative problem-solving</li>
-    <li>Oral and Written Communication</li>
-    <li>Languages: Spanish (Native), English (C2), French (C1)</li>
-  </ul>
-  <h3>Technical</h3>
-  <ul>
-    <li>Numerical Methods: FEM, FVM, DNS, ROMs</li>
-    <li>Languages: Python, C, Fortran, Matlab</li>
-    <li>CFD: Basilisk, ANSYS CFX, Fluent</li>
-  </ul>
+  <h2 class="border-rule text-ink mt-10 border-b pb-1 text-lg font-semibold tracking-tight">
+    Skills
+  </h2>
+  <div class="mt-3 grid grid-cols-1 gap-x-8 gap-y-4 sm:grid-cols-[8rem_1fr]">
+    <h3 class="text-ink-muted text-sm">Soft</h3>
+    <ul class="list-disc space-y-1 pl-5">
+      <li>Adaptability and Learning Agility</li>
+      <li>Creative problem-solving</li>
+      <li>Oral and Written Communication</li>
+      <li>Languages: Spanish (Native), English (C2), French (C1)</li>
+    </ul>
+    <h3 class="text-ink-muted text-sm">Technical</h3>
+    <ul class="list-disc space-y-1 pl-5">
+      <li>Numerical Methods: FEM, FVM, DNS, ROMs</li>
+      <li>Languages: Python, C, Fortran, Matlab</li>
+      <li>CFD: Basilisk, ANSYS CFX, Fluent</li>
+    </ul>
+  </div>
 
-  <h2>Research Experience</h2>
-  <h3>Research Fellow, Centre Borelli UMR 9010</h3>
-  <p>École Normale Supérieure Paris-Saclay, Greater Paris, France (2022–2025)</p>
-  <ul>
-    <li>
-      Developed phenomenological models of the interaction between surface
-      waves and internal stratification using experiments, simulations, and
-      PINNs.
-    </li>
-    <li>
-      Devised a novel approach to study two non-miscible fluids under intense
-      horizontal vibrations ("frozen wave" instability) using experiments and
-      simulations.
-    </li>
-  </ul>
-  <h3>Research Fellow, IRPHÉ UMR 7342</h3>
-  <p>CNRS/Aix-Marseille Université, Marseille, France (2019–2022)</p>
-  <ul>
-    <li>
-      Developed simplified models to study the wake of an asymmetric rotor in
-      good agreement with experimental data.
-    </li>
-    <li>
-      Proposed an approach to study rotor wakes with twin tip vortices on the
-      Vortex Filament Method (VFM).
-    </li>
-  </ul>
+  <h2 class="border-rule text-ink mt-10 border-b pb-1 text-lg font-semibold tracking-tight">
+    Research Experience
+  </h2>
+  <div class="mt-3 space-y-6">
+    {
+      experience.map((entry) => (
+        <div class="grid grid-cols-1 gap-x-8 gap-y-1 sm:grid-cols-[8rem_1fr]">
+          <p class="text-ink-muted text-sm sm:pt-0.5">{entry.period}</p>
+          <div>
+            <h3 class="text-ink font-medium">{entry.role}</h3>
+            <p class="text-ink-muted text-sm">{entry.place}</p>
+            <ul class="mt-2 list-disc space-y-1 pl-5">
+              {entry.bullets.map((bullet) => (
+                <li>{bullet}</li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      ))
+    }
+  </div>
 
-  <h2>Industry Experience</h2>
-  <h3>Project Engineer</h3>
-  <p>
-    Tiger-Sepam / SAEG Engineering Group / BG; Cartagena, Bogotá &amp;
-    Barrancabermeja, Colombia (2009–2011)
-  </p>
-  <ul>
-    <li>
-      Executed phase A and prepared phases B/B1 for the Cartagena Refinery
-      Expansion Project.
-    </li>
-    <li>
-      Assisted in bidding, tendering, planning, and execution of HVAC, energy
-      recovery, and automation projects.
-    </li>
-  </ul>
+  <h2 class="border-rule text-ink mt-10 border-b pb-1 text-lg font-semibold tracking-tight">
+    Industry Experience
+  </h2>
+  <div class="mt-3 space-y-6">
+    {
+      industry.map((entry) => (
+        <div class="grid grid-cols-1 gap-x-8 gap-y-1 sm:grid-cols-[8rem_1fr]">
+          <p class="text-ink-muted text-sm sm:pt-0.5">{entry.period}</p>
+          <div>
+            <h3 class="text-ink font-medium">{entry.role}</h3>
+            <p class="text-ink-muted text-sm">{entry.place}</p>
+            <ul class="mt-2 list-disc space-y-1 pl-5">
+              {entry.bullets.map((bullet) => (
+                <li>{bullet}</li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      ))
+    }
+  </div>
 
-  <h2>Education</h2>
-  <ul>
-    <li>PhD in Fluid Mechanics — University of Paris VI (UPMC), Paris, France (2017)</li>
-    <li>MSc in Energetics &amp; Environment — ENSAM ParisTech, Paris, France (2013)</li>
-  </ul>
+  <h2 class="border-rule text-ink mt-10 border-b pb-1 text-lg font-semibold tracking-tight">
+    Education
+  </h2>
+  <div class="mt-3 space-y-3">
+    {
+      education.map((entry) => (
+        <div class="grid grid-cols-1 gap-x-8 gap-y-1 sm:grid-cols-[8rem_1fr]">
+          <p class="text-ink-muted text-sm sm:pt-0.5">{entry.period}</p>
+          <div>
+            <h3 class="text-ink font-medium">{entry.degree}</h3>
+            <p class="text-ink-muted text-sm">{entry.place}</p>
+          </div>
+        </div>
+      ))
+    }
+  </div>
 </Base>
+
+<style>
+  @media print {
+    :global(:root) {
+      color-scheme: light;
+    }
+    :global(header),
+    :global(footer) {
+      display: none;
+    }
+    :global(body) {
+      background: white;
+      color: black;
+    }
+    :global(main) {
+      max-width: none;
+      padding: 0;
+      margin: 0;
+    }
+    :global(.text-ink-muted) {
+      color: #444;
+    }
+    :global(.border-rule) {
+      border-color: #ccc;
+    }
+    :global(a) {
+      color: black;
+      text-decoration: none;
+    }
+  }
+</style>

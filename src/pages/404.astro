@@ -1,0 +1,11 @@
+---
+import Base from '../layouts/Base.astro';
+import { withBase } from '../utils/url';
+---
+
+<Base title="Page not found">
+  <h1 class="text-3xl font-semibold tracking-tight">Page not found</h1>
+  <p class="mt-3">
+    <a href={withBase('/')} class="text-accent">Back home</a>
+  </p>
+</Base>
