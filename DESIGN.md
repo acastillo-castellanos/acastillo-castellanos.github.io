@@ -20,7 +20,7 @@ the site is mostly text and math.
 
 ---
 
-## Phase D0 — Tokens, fonts, dark mode foundation
+## Phase D0 — Tokens, fonts, dark mode foundation ✅ done (`333d045`)
 
 1. Install:
    ```bash

@@ -11,6 +11,18 @@ interface Props {
 
 const { title, description = SITE.description } = Astro.props;
 const pageTitle = title ? `${title} · ${SITE.title}` : SITE.title;
+
+const navLinks = [
+  { href: withBase('/'), label: 'About' },
+  { href: withBase('/publications/'), label: 'Publications' },
+  { href: withBase('/blog/'), label: 'Blog' },
+  { href: withBase('/cv/'), label: 'CV' },
+];
+const { pathname } = Astro.url;
+const isActive = (href: string) =>
+  href === withBase('/') ? pathname === href : pathname.startsWith(href);
+
+const year = new Date().getFullYear();
 ---
 
 <html lang="en">
@@ -28,15 +40,43 @@ const pageTitle = title ? `${title} · ${SITE.title}` : SITE.title;
     />
     <title>{pageTitle}</title>
   </head>
-  <body>
-    <nav>
-      <a href={withBase('/')}>About</a>
-      <a href={withBase('/publications/')}>Publications</a>
-      <a href={withBase('/blog/')}>Blog</a>
-      <a href={withBase('/cv/')}>CV</a>
-    </nav>
-    <main>
+  <body class="flex min-h-screen flex-col">
+    <a
+      href="#content"
+      class="bg-accent absolute left-2 -top-16 z-10 rounded px-3 py-2 text-white focus:top-2"
+      >Skip to content</a
+    >
+    <header class="border-rule border-b px-4">
+      <nav
+        class="mx-auto flex max-w-2xl flex-wrap items-center justify-between gap-x-4 gap-y-2 py-4 text-sm"
+      >
+        <a href={withBase('/')} class="text-ink font-semibold no-underline">{SITE.author}</a>
+        <div class="flex flex-wrap gap-x-4 gap-y-2">
+          {
+            navLinks.map((link) => (
+              <a
+                href={link.href}
+                class:list={[
+                  'py-1 no-underline',
+                  isActive(link.href)
+                    ? 'text-accent underline underline-offset-4'
+                    : 'text-ink-muted',
+                ]}
+              >
+                {link.label}
+              </a>
+            ))
+          }
+        </div>
+      </nav>
+    </header>
+    <main id="content" class="mx-auto w-full max-w-2xl flex-1 px-4 py-8">
       <slot />
     </main>
+    <footer class="border-rule border-t px-4">
+      <p class="text-ink-muted mx-auto max-w-2xl py-6 text-sm">
+        © {year} {SITE.author} · <a href={withBase('/rss.xml')}>RSS</a>
+      </p>
+    </footer>
   </body>
 </html>
