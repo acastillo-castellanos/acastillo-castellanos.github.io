@@ -135,7 +135,12 @@ Commit: `style: home page`
    KaTeX: display equations get `overflow-x: auto` on `.katex-display` and
    vertical margin, so long equations scroll instead of breaking the layout
    on mobile.
-3. **Publications** (`src/pages/publications.astro`): reference-list style —
+3. **Open science (CNRS practice)**: add an optional `hal: z.string().optional()`
+   field to the publications schema in `src/content.config.ts` (HAL document
+   URL, e.g. `https://hal.science/hal-XXXXXXX`). When present, render a
+   "HAL" link next to DOI/PDF — open-access first, per CNRS science ouverte
+   policy.
+4. **Publications** (`src/pages/publications.astro`): reference-list style —
    no bullets, hanging indent, year groups (`<h2>` per year, entries under
    it), author list with "A. Castillo-Castellanos" wrapped in `<strong>`
    (string-match in the template), journal in italics, DOI/PDF as small
@@ -177,8 +182,56 @@ Commit: `style: CV layout, print stylesheet, 404`
 
 ---
 
+## Phase D5 — Home hero media (optional, after D0–D4 ship)
+
+A short fluid-dynamics loop (simulation render or experiment footage) as a
+**bounded** hero element on the index page — never a full-page background,
+never behind text.
+
+1. Asset: 5–10 s loop, muted, no audio track, 720p, AV1 or H.264, **≤ 3 MB**,
+   plus a still `poster` image (first frame or best frame, ~100 kB WebP/AVIF).
+   Committed normally — **not** Git LFS (GitHub Pages does not serve LFS
+   files). Place under `public/media/`.
+2. Markup (no JS):
+   ```html
+   <video autoplay muted loop playsinline preload="metadata"
+          poster={withBase('/media/hero-poster.webp')}
+          src={withBase('/media/hero.mp4')}></video>
+   ```
+3. Reduced motion: inside `@media (prefers-reduced-motion: reduce)`, hide the
+   video and show the poster image instead (render both elements; toggle with
+   CSS only).
+4. Optional pause button is the only JS allowed (a few lines, progressive
+   enhancement — the page must work without it).
+
+**Done when:** build passes; index shows the loop in a bounded element; with
+OS reduced-motion enabled the poster shows instead; the video file is ≤ 3 MB.
+Commit: `feat: home hero media loop`
+
+---
+
 ## Out of scope
 
 Design toggles/JS theming, blog pagination, search, comments, analytics,
 OG-image generation, and any restyling of PyVista/model-viewer embeds
 (they arrive styled by their own libraries).
+
+## French institutional notes (context, not tasks)
+
+- **RGAA 4.1.2** (French accessibility referential, based on WCAG 2.1/EN 301 549)
+  legally binds public bodies' sites, not personal pages — but since this site
+  mirrors to CNRS infrastructure (plmlab), we align with its core criteria
+  anyway: AA contrast, keyboard navigation + visible focus, skip link,
+  `lang` attribute, reduced-motion support (all already in D0–D5).
+  Decorative hero video (D5) carries no information, is muted, and has a
+  poster fallback — RGAA-compatible as decorative media.
+- **CNIL / RGPD**: the site sets **no cookies and no trackers** and makes no
+  third-party requests (fonts and model-viewer self-hosted) — so no consent
+  banner is required. If analytics are ever wanted, use a CNIL
+  consent-exemption-configured self-hosted Matomo, never Google Analytics.
+- **DSFR** (Système de Design de l'État): its license restricts use to French
+  state sites — do **not** adopt it here.
+- **Science ouverte**: ORCID is the pivot researcher ID (already in
+  `site.ts`); the `hal` publication field (D3) links open-access HAL
+  versions. Consider creating an idHAL and linking it to ORCID (user action,
+  outside this repo).
