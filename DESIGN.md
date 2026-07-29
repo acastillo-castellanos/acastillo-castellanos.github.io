@@ -77,7 +77,7 @@ Commit: `style: design tokens, Google Sans Flex, automatic dark mode`
 
 ---
 
-## Phase D1 — Base layout (header, footer, page frame)
+## Phase D1 — Base layout (header, footer, page frame) ✅ done (`3becab2`)
 
 In `src/layouts/Base.astro` only:
 
