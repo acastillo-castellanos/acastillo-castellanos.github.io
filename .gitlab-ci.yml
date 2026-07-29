@@ -1,0 +1,15 @@
+pages:
+  image: node:22
+  stage: deploy
+  script:
+    - npm ci
+    - npm run build
+  variables:
+    SITE_URL: $CI_PAGES_URL
+    BASE_PATH: "/$CI_PROJECT_NAME/"
+  publish: dist
+  artifacts:
+    paths:
+      - dist
+  rules:
+    - if: $CI_COMMIT_BRANCH == "main"
