@@ -17,12 +17,14 @@ const icons = {
   scholar:
     'M5.242 13.769L0 9.5 12 0l12 9.5-5.242 4.269C17.548 11.24 14.978 9.5 12 9.5c-2.977 0-5.548 1.74-6.758 4.269zM12 10a7 7 0 1 0 0 14 7 7 0 0 0 0-14z',
   mail: 'M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z',
+  hal: 'M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z',
 };
 
 const links = [
   { href: SITE.links.github, label: 'GitHub', icon: icons.github },
   { href: SITE.links.orcid, label: 'ORCID', icon: icons.orcid },
   { href: SITE.links.scholar, label: 'Google Scholar', icon: icons.scholar },
+  { href: SITE.links.hal, label: 'HAL', icon: icons.hal },
 ];
 ---
 
@@ -41,7 +43,7 @@ const links = [
     }
     <div>
       <h1 class="text-3xl font-semibold tracking-tight">{SITE.title}</h1>
-      <p class="text-ink-muted mt-1">Research Engineer | PhD in Fluid Mechanics</p>
+      <p class="text-ink-muted mt-1">Research Scientist in Fluid Mechanics</p>
     </div>
   </div>
   <p class="mt-6 max-w-prose">
@@ -72,6 +74,17 @@ const links = [
           <path d={icons.mail} />
         </svg>
         {SITE.email}
+      </a>
+    </li>
+    <li class="list-none">
+      <a
+        href={`mailto:${SITE.emailInstitutional}`}
+        class="text-ink-muted hover:text-accent flex items-center gap-2 no-underline"
+      >
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true">
+          <path d={icons.mail} />
+        </svg>
+        {SITE.emailInstitutional}
       </a>
     </li>
   </ul>
