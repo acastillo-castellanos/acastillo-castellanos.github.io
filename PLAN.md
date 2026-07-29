@@ -205,7 +205,7 @@ Commit: `feat: content collections, core pages, RSS`
 
 ---
 
-## Phase 4 — CI/CD for both hosts
+## Phase 4 — CI/CD for both hosts ✅ COMPLETE (2026-07-29, GitHub side live; plmlab mirror pending user)
 
 ### 4.1 GitHub Pages
 
