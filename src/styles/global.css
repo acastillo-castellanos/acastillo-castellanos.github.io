@@ -1,1 +1,43 @@
-@import "tailwindcss";
+@import 'tailwindcss';
+@plugin '@tailwindcss/typography';
+@import '@fontsource-variable/google-sans-flex';
+
+@theme {
+  --font-sans: 'Google Sans Flex Variable', ui-sans-serif, system-ui, sans-serif;
+  --color-accent-600: oklch(0.52 0.1 195); /* teal, light-mode links */
+  --color-accent-400: oklch(0.72 0.1 195); /* teal, dark-mode links */
+}
+
+:root {
+  color-scheme: light dark;
+  /* paper / ink pairs; light-dark() flips them with the OS preference */
+  --bg: light-dark(oklch(0.99 0 0), oklch(0.21 0.01 250));
+  --bg-subtle: light-dark(oklch(0.96 0 0), oklch(0.26 0.01 250));
+  --ink: light-dark(oklch(0.25 0.01 250), oklch(0.9 0.005 250));
+  --ink-muted: light-dark(oklch(0.5 0.01 250), oklch(0.7 0.005 250));
+  --accent: light-dark(var(--color-accent-600), var(--color-accent-400));
+  --rule: light-dark(oklch(0.9 0 0), oklch(0.32 0.01 250));
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-bg-subtle: var(--bg-subtle);
+  --color-ink: var(--ink);
+  --color-ink-muted: var(--ink-muted);
+  --color-accent: var(--accent);
+  --color-rule: var(--rule);
+}
+
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-sans);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    transition: none !important;
+  }
+}
