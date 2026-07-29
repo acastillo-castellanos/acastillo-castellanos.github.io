@@ -211,6 +211,48 @@ Commit: `feat: home hero media loop`
 
 ---
 
+## Phase D6 — Security hardening (independent of styling; can run anytime)
+
+The site is static — no forms, no auth, no user input — so the realistic
+threats are **supply chain** (npm packages, GitHub Actions) and **account
+takeover**, not XSS on the pages. Harden accordingly:
+
+1. **Pin GitHub Actions to commit SHAs** in `.github/workflows/deploy.yml`:
+   replace each `uses: owner/action@vN` with `@<full-40-char-sha> # vN.N.N`
+   (look up the SHA of the current release tag for `actions/checkout`,
+   `withastro/action`, `actions/deploy-pages`). Tags are mutable; SHAs are
+   the exact audited code.
+2. **Scope workflow permissions per job**: top-level `permissions: {}`
+   (or `contents: read`); move `pages: write` + `id-token: write` down onto
+   the `deploy` job only, and give `build` just `contents: read`.
+3. **Add `.github/dependabot.yml`** with two update ecosystems, weekly:
+   `npm` (keeps Astro/Tailwind/KaTeX deps patched) and `github-actions`
+   (keeps the SHA pins moving — Dependabot updates pinned SHAs and the
+   version comment together).
+4. **Meta CSP** (defense in depth — GitHub Pages cannot set response
+   headers, so a `<meta http-equiv="Content-Security-Policy">` in
+   `Base.astro`'s `<head>` is the only option). Start from:
+   ```
+   default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline';
+   img-src 'self' data:; font-src 'self'; base-uri 'self'; form-action 'none';
+   object-src 'none'
+   ```
+   `style-src 'unsafe-inline'` is required: KaTeX emits inline `style=`
+   attributes and Astro may inline small stylesheets. Known meta-tag
+   limits: `frame-ancestors` and report-only mode don't work via meta —
+   accept that. **Done when:** all six routes (5 pages + 404) render with
+   zero CSP violations in the browser console, including a blog post with
+   math and (if enabled) the model-viewer component.
+
+**User actions (outside the repo):** enable 2FA/passkey on the GitHub
+account (an attacker with the account owns the site); check that Dependabot
+alerts + secret scanning are enabled in repo Settings → Security (default
+for public repos); optionally protect the `main` branch.
+
+Commit: `chore: pin actions, dependabot, scoped permissions, meta CSP`
+
+---
+
 ## Out of scope
 
 Design toggles/JS theming, blog pagination, search, comments, analytics,
@@ -239,6 +281,14 @@ OG-image generation, and any restyling of PyVista/model-viewer embeds
   honor `prefers-reduced-data` (D5), WOFF2-only subset fonts (Fontsource
   default, D0), and no client-side JS beyond progressive enhancement —
   already a plan rule.
+- **Security posture (context for D6)**: `*.github.io` is HSTS-preloaded and
+  HTTPS-only, so transport security is handled by the host. GitHub Pages
+  offers no custom response headers at all — header-based controls (HSTS
+  tuning, `frame-ancestors`, report-only CSP) are simply unavailable; the
+  meta CSP in D6 is the ceiling. The site already avoids the classic
+  static-site pitfalls: no third-party scripts after D4 (no SRI needed
+  because nothing is remote), no analytics, no forms. `package-lock.json`
+  is committed and CI uses `npm ci`, so builds are reproducible.
 - **Science ouverte**: ORCID is the pivot researcher ID (already in
   `site.ts`); the `hal` publication field (D3) links open-access HAL
   versions. Consider creating an idHAL and linking it to ORCID (user action,
