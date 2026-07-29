@@ -96,7 +96,9 @@ In `src/layouts/Base.astro` only:
 
 **Done when:** build passes; every page shows the framed layout, the current
 page is highlighted in the nav on all five pages, and keyboard Tab shows
-visible focus rings.
+visible focus rings. Mobile check: at a 320px-wide viewport nothing
+overflows horizontally, body text is ≥ 16px, and nav links have enough
+padding/line-height to give ≥ 24px tap targets (WCAG 2.5.8).
 Commit: `style: header, footer, page frame`
 
 ---
@@ -149,7 +151,9 @@ Commit: `style: home page`
 **Done when:** build passes; the seed post body renders in styled prose with
 the Navier–Stokes equation horizontally scrollable at narrow viewport widths;
 publications page shows a year-grouped reference list with the site author
-bolded.
+bolded. Mobile check: post page and publications list at 320px width — no
+horizontal page scroll (only `.katex-display` scrolls), DOI/PDF/HAL links
+comfortably tappable.
 Commit: `style: blog and publications`
 
 ---
