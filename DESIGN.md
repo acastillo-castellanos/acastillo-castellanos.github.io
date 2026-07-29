@@ -123,7 +123,7 @@ Commit: `style: home page`
 
 ---
 
-## Phase D3 — Blog and publications
+## Phase D3 — Blog and publications ✅ done (`cbc5d06`)
 
 1. **Blog index** (`src/pages/blog/index.astro`): remove list bullets; each
    post is a block — title (medium weight, accent on hover), date + tags in
