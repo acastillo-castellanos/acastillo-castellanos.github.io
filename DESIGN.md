@@ -103,7 +103,7 @@ Commit: `style: header, footer, page frame`
 
 ---
 
-## Phase D2 — Home page
+## Phase D2 — Home page ✅ done
 
 `src/pages/index.astro`:
 
