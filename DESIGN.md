@@ -60,9 +60,19 @@ the site is mostly text and math.
    `text-ink-muted`, `text-accent`, `border-rule`, `bg-bg-subtle` exist.
    Use those utility names everywhere in later phases.
 
+4. Reduced motion (MDN): disable non-essential transitions globally:
+   ```css
+   @media (prefers-reduced-motion: reduce) {
+     *, *::before, *::after { transition: none !important; }
+   }
+   ```
+
 **Done when:** build passes; the site renders in Google Sans Flex on an off-white
 background, and switching the OS to dark mode flips it to a dark background
-with light text (no toggle anywhere).
+with light text (no toggle anywhere). Contrast check (WCAG AA): body text
+(`--ink` on `--bg`) ≥ 4.5:1 and accent-colored links ≥ 4.5:1 in **both**
+color schemes — verify with the WebAIM contrast checker and adjust the OKLCH
+lightness values if a pair fails.
 Commit: `style: design tokens, Google Sans Flex, automatic dark mode`
 
 ---
@@ -139,7 +149,7 @@ Commit: `style: blog and publications`
 
 ---
 
-## Phase D4 — CV, print, polish
+## Phase D4 — CV, print, polish, privacy fix
 
 1. **CV** (`src/pages/cv.astro`): section headings with a thin rule
    (`border-b border-rule`); each experience entry as a grid — dates/place in
@@ -149,7 +159,13 @@ Commit: `style: blog and publications`
    sensible margins — so "Print to PDF" from the browser yields a usable CV.
 3. **404 page** (`src/pages/404.astro`): minimal — "Page not found", link
    home via `withBase()`, uses `Base.astro`.
-4. Sweep: consistent vertical rhythm on all pages (same top margin under the
+4. **Privacy fix** — self-host model-viewer: `npm install @google/model-viewer`,
+   then in `src/components/ModelViewer.astro` replace the
+   `ajax.googleapis.com` CDN `<script>` with a bundled import
+   (`<script> import '@google/model-viewer'; </script>`), so visitors' IPs
+   are never sent to Google (same GDPR reasoning as self-hosted fonts).
+   Also update the README's 3D section if it mentions the CDN.
+5. Sweep: consistent vertical rhythm on all pages (same top margin under the
    header, same `h1` scale), `text-wrap: balance` on headings, favicon still
    correct in dark mode (the default Astro SVG adapts; replace only if it
    does not).
