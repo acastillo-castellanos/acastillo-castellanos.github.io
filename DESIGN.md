@@ -187,7 +187,18 @@ Commit: `style: CV layout, print stylesheet, 404`
 
 ---
 
-## Phase D5 — Home hero media (optional, after D0–D4 ship)
+## Phase D5 — Home hero media (optional, after D0–D4 ship) ✅ done (adapted)
+
+> Implemented as an **image-comparison slider** instead of a video loop: the
+> available asset was discrete simulation snapshots, not smooth footage. Two
+> transparent WebP crops of the same t3 Rayleigh–Taylor frame (case5) — full
+> interface (`public/media/hero-full.webp`, ~95 kB) vs. filtered fragments
+> (`public/media/hero-filtered.webp`, ~380 kB) — in
+> `src/components/CompareSlider.astro`: a range input drives a `clip-path`
+> divider (progressive enhancement; static 50/50 split without JS). The tiny
+> script is the D5-sanctioned JS exception; `assetsInlineLimit: 0` in
+> `astro.config.mjs` keeps it external so the meta CSP (`script-src 'self'`)
+> holds. Transparent backgrounds float on both color schemes.
 
 A short fluid-dynamics loop (simulation render or experiment footage) as a
 **bounded** hero element on the index page — never a full-page background,

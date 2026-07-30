@@ -2,6 +2,8 @@
 import { Image } from 'astro:assets';
 import Base from '../layouts/Base.astro';
 import { SITE } from '../data/site';
+import { withBase } from '../utils/url';
+import CompareSlider from '../components/CompareSlider.astro';
 
 const portraits = import.meta.glob<{ default: ImageMetadata }>(
   '../assets/portrait.{jpg,jpeg,png}',
@@ -46,14 +48,31 @@ const links = [
       <p class="text-ink-muted mt-1">Research Scientist in Fluid Mechanics</p>
     </div>
   </div>
-  <h2 class="text-ink animate-in-delay-1 mt-12 text-xl font-semibold tracking-tight">About me</h2>
-  <p class="animate-in-delay-1 mt-3 max-w-prose">
+  <figure class="animate-in-delay-1 mt-10">
+    <CompareSlider
+      topSrc={withBase('/media/hero-full.webp')}
+      bottomSrc={withBase('/media/hero-filtered.webp')}
+      topAlt="Side view of a turbulent Rayleigh–Taylor mixing layer: the full, highly distorted interface between the two fluids"
+      bottomAlt="The same mixing layer after filtering: only the detached fragments and droplets remain"
+      width={1400}
+      height={796}
+      label="Drag to filter the interface down to its detached fragments"
+    />
+    <figcaption class="text-ink-muted mt-2 text-sm">
+      Turbulent Rayleigh–Taylor mixing layer with small Bond number, from direct numerical simulation
+      using Basilisk. Drag the slider to filter the distorted interface down to
+      its detached fragments.
+    </figcaption>
+  </figure>
+
+  <h2 class="text-ink animate-in-delay-2 mt-12 text-xl font-semibold tracking-tight">About me</h2>
+  <p class="animate-in-delay-2 mt-3 max-w-prose">
     Research scientist specializing in hydrodynamic instabilities. My research combines
     numerical simulations with the analysis of laboratory experiments to
     understand heat transfer, mixing, vortex, and two-phase flows.
   </p>
 
-  <ul class="animate-in-delay-2 mt-12 flex flex-wrap gap-x-6 gap-y-3 pl-0">
+  <ul class="animate-in-delay-3 mt-12 flex flex-wrap gap-x-6 gap-y-3 pl-0">
     {
       links.map((link) => (
         <li class="list-none">

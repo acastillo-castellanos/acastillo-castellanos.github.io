@@ -14,7 +14,12 @@ export default defineConfig({
   site,
   base,
   integrations: [sitemap()],
-  vite: { plugins: [tailwindcss()] },
+  vite: {
+    plugins: [tailwindcss()],
+    // Never inline scripts/assets into the HTML: the meta CSP in Base.astro
+    // allows only same-origin external scripts (script-src 'self').
+    build: { assetsInlineLimit: 0 },
+  },
   markdown: {
     remarkPlugins: [remarkMath],
     rehypePlugins: [rehypeKatex],

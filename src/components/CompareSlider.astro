@@ -1,0 +1,79 @@
+---
+// Before/after comparison: `topSrc` is clipped to the left of the divider,
+// `bottomSrc` shows to the right. Works without JS as a 50/50 static split;
+// the script only wires the range input to the divider position.
+interface Props {
+  topSrc: string;
+  bottomSrc: string;
+  topAlt: string;
+  bottomAlt: string;
+  width: number;
+  height: number;
+  label: string;
+}
+
+const { topSrc, bottomSrc, topAlt, bottomAlt, width, height, label } = Astro.props;
+---
+
+<div class="compare-slider relative select-none" data-compare-slider>
+  <img src={bottomSrc} alt={bottomAlt} width={width} height={height} class="w-full" />
+  <img
+    src={topSrc}
+    alt={topAlt}
+    width={width}
+    height={height}
+    class="compare-top absolute inset-0 w-full"
+    draggable="false"
+  />
+  <div class="compare-divider absolute inset-y-0 w-px" aria-hidden="true"></div>
+  <input
+    type="range"
+    min="0"
+    max="100"
+    value="50"
+    step="any"
+    aria-label={label}
+    class="compare-range absolute inset-0 h-full w-full"
+  />
+</div>
+
+<style>
+  .compare-slider {
+    --pos: 50%;
+  }
+  .compare-top {
+    clip-path: inset(0 calc(100% - var(--pos)) 0 0);
+  }
+  .compare-divider {
+    left: var(--pos);
+    background: var(--rule);
+  }
+  .compare-range {
+    appearance: none;
+    -webkit-appearance: none;
+    background: transparent;
+    cursor: ew-resize;
+    margin: 0;
+  }
+  .compare-range::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 2.5rem;
+    height: 100%;
+    background: transparent;
+  }
+  .compare-range::-moz-range-thumb {
+    width: 2.5rem;
+    height: 100%;
+    border: none;
+    background: transparent;
+  }
+</style>
+
+<script>
+  for (const slider of document.querySelectorAll<HTMLElement>('[data-compare-slider]')) {
+    const range = slider.querySelector<HTMLInputElement>('input[type="range"]');
+    range?.addEventListener('input', () => {
+      slider.style.setProperty('--pos', `${range.value}%`);
+    });
+  }
+</script>
