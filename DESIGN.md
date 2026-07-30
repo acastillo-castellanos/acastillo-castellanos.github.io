@@ -10,7 +10,8 @@ the site is mostly text and math.
 
 - Execute phases in order; stop and report if a "Done when" check fails.
 - No JavaScript for styling/theming. No component libraries. No animations
-  beyond CSS `transition` on hover/focus.
+  beyond CSS `transition` on hover/focus, except the one-time entrance
+  animations scoped to Phase D8.
 - All colors, fonts, and sizes come from the design tokens in
   `src/styles/global.css` — never hard-code a hex value in a component.
 - Do not change page content or routes; styling only. Keep `withBase()` for
@@ -310,6 +311,35 @@ between language equivalents (not to the other homepage); `/fr/blog/`
 redirects to `/blog/`; hreflang pairs present on translated pages; a
 `BASE_PATH=/testbase/` build keeps every locale URL under the prefix.
 Commit: `feat: bilingual EN/FR — i18n config, French home and CV, language switcher`
+
+---
+
+## Phase D8 — Entrance animations (optional, visual polish)
+
+The site currently reads as static/flat once loaded. Add a light, one-time
+entrance animation on first paint — no scroll-triggered JS, no libraries.
+
+1. In `global.css`, define `@keyframes fade-in-up` (opacity 0→1, translateY
+   ~8px→0, ~400ms ease-out) alongside the existing reduced-motion block.
+2. Apply via a small set of utility classes (e.g. `.animate-in`,
+   `.animate-in-delay-1/2/3`) using CSS `animation`, staggered with
+   `animation-delay` in ~80ms steps — applied directly in markup to page-level
+   elements (heading, bio, links row on the home page; header block on other
+   pages). No JS, no IntersectionObserver — everything animates on load since
+   pages are short enough that nothing is off-screen.
+3. Respect `prefers-reduced-motion: reduce` — the existing global rule
+   (`* { transition: none !important; }`) must be extended to also zero out
+   `animation` for these classes, so reduced-motion users see the final state
+   immediately with no motion.
+4. Keep it subtle: opacity + small translate only, no bounce/scale, no color
+   animation, ~400ms total per element. This is meant to soften the "boring"
+   flat-load feel, not add visual noise.
+
+**Done when:** build passes; loading `/` shows a brief, staggered fade/rise-in
+of the name, bio, and links row; other pages get a lighter single fade on
+their header block; with OS reduced-motion enabled every page renders in its
+final state immediately, no animation.
+Commit: `style: entrance animations on page load`
 
 ---
 

@@ -1,0 +1,72 @@
+---
+import Base from '../layouts/Base.astro';
+
+// TODO(andres): fill in your real research projects below. `link` and
+// `funding` are optional — omit the key entirely (not just leave it empty)
+// to hide that part of the entry. Add/remove objects freely.
+const currentProjects = [
+  {
+    title: 'Project title',
+    period: '2023–present',
+    description: 'One or two sentences describing the project and your role.',
+    funding: 'Funding body / grant name',
+    link: 'https://example.org',
+  },
+];
+
+const completedProjects = [
+  {
+    title: 'Project title',
+    period: '2020–2023',
+    description: 'One or two sentences describing the project and your role.',
+    funding: 'Funding body / grant name',
+    link: undefined,
+  },
+];
+---
+
+<Base title="Projects">
+  <h1 class="text-3xl font-semibold tracking-tight">Projects</h1>
+
+  <h2 class="text-ink mt-10 text-xl font-semibold tracking-tight">Current research projects</h2>
+  <ul class="mt-3 space-y-6 pl-0">
+    {
+      currentProjects.map((project) => (
+        <li class="list-none">
+          <div class="flex flex-wrap items-baseline gap-x-3">
+            <span class="text-ink font-medium">{project.title}</span>
+            <span class="text-ink-muted text-sm">{project.period}</span>
+          </div>
+          <p class="text-ink-muted mt-1 max-w-prose">{project.description}</p>
+          {project.funding && <p class="text-ink-muted mt-1 text-sm">{project.funding}</p>}
+          {project.link && (
+            <a href={project.link} class="text-accent mt-1 inline-block text-sm">
+              {project.link}
+            </a>
+          )}
+        </li>
+      ))
+    }
+  </ul>
+
+  <h2 class="text-ink mt-12 text-xl font-semibold tracking-tight">Completed projects</h2>
+  <ul class="mt-3 space-y-6 pl-0">
+    {
+      completedProjects.map((project) => (
+        <li class="list-none">
+          <div class="flex flex-wrap items-baseline gap-x-3">
+            <span class="text-ink font-medium">{project.title}</span>
+            <span class="text-ink-muted text-sm">{project.period}</span>
+          </div>
+          <p class="text-ink-muted mt-1 max-w-prose">{project.description}</p>
+          {project.funding && <p class="text-ink-muted mt-1 text-sm">{project.funding}</p>}
+          {project.link && (
+            <a href={project.link} class="text-accent mt-1 inline-block text-sm">
+              {project.link}
+            </a>
+          )}
+        </li>
+      ))
+    }
+  </ul>
+</Base>
