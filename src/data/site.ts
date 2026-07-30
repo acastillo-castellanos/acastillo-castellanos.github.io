@@ -4,7 +4,7 @@ export const SITE = {
   author: 'Andrés Castillo-Castellanos',
   email: 'andres.castillo.castellanos@proton.me',
   emailInstitutional: 'andres.castillo_castellanos@ens-paris-saclay.fr',
-  location: 'Greater Paris, France',
+  location: 'Paris-Saclay, France',
   links: {
     github: 'https://github.com/acastillo-castellanos',
     // The following are placeholders — user must fill real IDs later:

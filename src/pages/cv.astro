@@ -4,47 +4,66 @@ import { SITE } from '../data/site';
 
 const experience = [
   {
-    role: 'Research Fellow, Centre Borelli UMR 9010',
-    place: 'École Normale Supérieure Paris-Saclay, Greater Paris, France',
-    period: '2022–2025',
+    role: 'Research Scientist, Centre Borelli',
+    place: 'CNRS/École Normale Supérieure Paris-Saclay (UMR 9010), Gif-sur-Yvette, France. Work carried out within LRC MESO, a joint laboratory with CEA.',
+    period: '2022–Present',
     bullets: [
-      'Developed phenomenological models of the interaction between surface waves and internal stratification using experiments, simulations, and PINNs.',
-      'Devised a novel approach to study two non-miscible fluids under intense horizontal vibrations ("frozen wave" instability) using experiments and simulations.',
+      'Currently studying how surface tension and viscosity contrast alter the growth and mixing of the Rayleigh–Taylor instability, with results feeding machine-learning models at CEA.',
+      'Studied how two immiscible fluids reach equilibrium under intense horizontal vibration ("frozen waves"). Currently, a micro-gravity campaign is planned with LPENS/CNES.',
+      'Showed how Faraday surface waves mix the stratified fluid beneath them, building simple models from joint experiments and simulations.',
     ],
   },
   {
-    role: 'Research Fellow, IRPHÉ UMR 7342',
-    place: 'CNRS/Aix-Marseille Université, Marseille, France',
+    role: 'Research Scientist, Institut de Recherche sur les Phénomènes Hors Équilibre (IRPHÉ)',
+    place: 'CNRS/Aix-Marseille Université (UMR 7342), Marseille, France',
     period: '2019–2022',
     bullets: [
-      'Developed simplified models to study the wake of an asymmetric rotor in good agreement with experimental data.',
-      'Proposed an approach to study rotor wakes with twin tip vortices on the Vortex Filament Method (VFM).',
+      'Modelled how the wake behind an asymmetric rotor breaks down, showing that vortex instabilities can be deliberately triggered to accelerate wake recovery.',
+      'Showed how closely spaced pairs of helical vortices deform and become unstable (long-wave instabilities).',
     ],
   },
-];
-
-const industry = [
   {
-    role: 'Project Engineer',
-    place: 'Tiger-Sepam / SAEG Engineering Group / BG; Cartagena, Bogotá & Barrancabermeja, Colombia',
-    period: '2009–2011',
+    role: "Research Scientist, Laboratoire d'informatique pour la mécanique et les sciences de l'ingénieur (LIMSI, now LISN)",
+    place: 'CNRS (UPR 3251), Orsay, France',
+    period: '2017–2018',
     bullets: [
-      'Executed phase A and prepared phases B/B1 for the Cartagena Refinery Expansion Project.',
-      'Assisted in bidding, tendering, planning, and execution of HVAC, energy recovery, and automation projects.',
+      'Built reduced-order models that capture the essential dynamics of flow reversals in turbulent convection (POD, CROM).',
+    ],
+  },
+  {
+    role: "PhD Student, Institut Jean Le Rond d'Alembert (IJLRDA)",
+    place: 'CNRS/Sorbonne Université (UMR 7190), Paris, France',
+    period: '2013–2017',
+    bullets: [
+      'Characterised rare, sudden changes of the large-scale circulation (flow reversals) in turbulent convection, from direct numerical simulations (DNS).',
+      'Showed how lateral confinement and boundary conditions change the flow structure and heat transfer in turbulent convection.',
     ],
   },
 ];
 
 const education = [
-  { degree: 'PhD in Fluid Mechanics', place: 'University of Paris VI (UPMC), Paris, France', period: '2017' },
-  { degree: 'MSc in Energetics & Environment', place: 'ENSAM ParisTech, Paris, France', period: '2013' },
+  {
+    degree: 'PhD in Fluid Mechanics',
+    place: 'Université Pierre-et-Marie-Curie (now Sorbonne Université), Paris, France',
+    period: '2017'
+  },
+  {
+    degree: 'MSc in Energetics & Environment',
+    place: 'Arts et Métiers (ENSAM), Paris, France',
+    period: '2013'
+  },
+  {
+    degree: 'BSc in Mechanical Engineering (Ingeniero Mecánico)',
+    place: 'Universidad Industrial de Santander, Bucaramanga, Colombia',
+    period: '2008'
+  },
 ];
 ---
 
 <Base title="CV">
   <h1 class="text-3xl font-semibold tracking-tight">Curriculum Vitae</h1>
   <p class="text-ink-muted mt-3">
-    Andrés Castillo · Research Engineer | PhD in Fluid Mechanics<br />
+    Andrés Castillo-Castellanos · Research Scientist in Fluid Mechanics<br />
     {SITE.email} · {SITE.location}
   </p>
 
@@ -52,30 +71,12 @@ const education = [
     Profile
   </h2>
   <p class="mt-3 max-w-prose">
-    Mechanical Engineer with a doctorate in fluid dynamics and over seven years
-    of research experience. Specializing in modelling and simulation of heat
-    transfer, vortex, and two-phase flow. Proficient in numerical methods, data
-    analysis, visualization, scientific computing &amp; HPC.
+    Research scientist in fluid mechanics with 12+ years of experience studying
+    waves, hydrodynamic instabilities, and turbulence. I combine
+    high-performance simulations, laboratory experiments, and simple models to
+    understand how flows mix, destabilise, and organise — working closely with
+    experimentalists and national-lab partners (CNRS, CEA, CNES).
   </p>
-
-  <h2 class="border-rule text-ink mt-10 border-b pb-1 text-lg font-semibold tracking-tight">
-    Skills
-  </h2>
-  <div class="mt-3 grid grid-cols-1 gap-x-8 gap-y-4 sm:grid-cols-[8rem_1fr]">
-    <h3 class="text-ink-muted text-sm">Soft</h3>
-    <ul class="list-disc space-y-1 pl-5">
-      <li>Adaptability and Learning Agility</li>
-      <li>Creative problem-solving</li>
-      <li>Oral and Written Communication</li>
-      <li>Languages: Spanish (Native), English (C2), French (C1)</li>
-    </ul>
-    <h3 class="text-ink-muted text-sm">Technical</h3>
-    <ul class="list-disc space-y-1 pl-5">
-      <li>Numerical Methods: FEM, FVM, DNS, ROMs</li>
-      <li>Languages: Python, C, Fortran, Matlab</li>
-      <li>CFD: Basilisk, ANSYS CFX, Fluent</li>
-    </ul>
-  </div>
 
   <h2 class="border-rule text-ink mt-10 border-b pb-1 text-lg font-semibold tracking-tight">
     Research Experience
@@ -83,28 +84,6 @@ const education = [
   <div class="mt-3 space-y-6">
     {
       experience.map((entry) => (
-        <div class="grid grid-cols-1 gap-x-8 gap-y-1 sm:grid-cols-[8rem_1fr]">
-          <p class="text-ink-muted text-sm sm:pt-0.5">{entry.period}</p>
-          <div>
-            <h3 class="text-ink font-medium">{entry.role}</h3>
-            <p class="text-ink-muted text-sm">{entry.place}</p>
-            <ul class="mt-2 list-disc space-y-1 pl-5">
-              {entry.bullets.map((bullet) => (
-                <li>{bullet}</li>
-              ))}
-            </ul>
-          </div>
-        </div>
-      ))
-    }
-  </div>
-
-  <h2 class="border-rule text-ink mt-10 border-b pb-1 text-lg font-semibold tracking-tight">
-    Industry Experience
-  </h2>
-  <div class="mt-3 space-y-6">
-    {
-      industry.map((entry) => (
         <div class="grid grid-cols-1 gap-x-8 gap-y-1 sm:grid-cols-[8rem_1fr]">
           <p class="text-ink-muted text-sm sm:pt-0.5">{entry.period}</p>
           <div>
