@@ -9,7 +9,7 @@ const posts = (await getCollection('blog', ({ data }) => !data.draft)).sort(
 ---
 
 <Base title="Blog">
-  <h1 class="text-3xl font-semibold tracking-tight">Blog</h1>
+  <h1 class="animate-in text-3xl font-semibold tracking-tight">Blog</h1>
   <div class="mt-8 space-y-8">
     {
       posts.map((post) => (

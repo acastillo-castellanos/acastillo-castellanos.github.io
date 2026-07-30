@@ -29,7 +29,7 @@ const links = [
 ---
 
 <Base>
-  <div class="flex items-center gap-6">
+  <div class="animate-in flex items-center gap-6">
     {
       portrait && (
         <Image
@@ -46,14 +46,14 @@ const links = [
       <p class="text-ink-muted mt-1">Research Scientist in Fluid Mechanics</p>
     </div>
   </div>
-  <h2 class="text-ink mt-12 text-xl font-semibold tracking-tight">About me</h2>
-  <p class="mt-3 max-w-prose">
+  <h2 class="text-ink animate-in-delay-1 mt-12 text-xl font-semibold tracking-tight">About me</h2>
+  <p class="animate-in-delay-1 mt-3 max-w-prose">
     Research scientist specializing in hydrodynamic instabilities. My research combines
     numerical simulations with the analysis of laboratory experiments to
-    understand heat transfer, mixing, vortex, and two-phase flows. 
+    understand heat transfer, mixing, vortex, and two-phase flows.
   </p>
 
-  <ul class="mt-12 flex flex-wrap gap-x-6 gap-y-3 pl-0">
+  <ul class="animate-in-delay-2 mt-12 flex flex-wrap gap-x-6 gap-y-3 pl-0">
     {
       links.map((link) => (
         <li class="list-none">

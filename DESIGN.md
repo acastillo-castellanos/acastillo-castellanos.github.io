@@ -314,7 +314,7 @@ Commit: `feat: bilingual EN/FR — i18n config, French home and CV, language swi
 
 ---
 
-## Phase D8 — Entrance animations (optional, visual polish)
+## Phase D8 — Entrance animations (optional, visual polish) ✅ done
 
 The site currently reads as static/flat once loaded. Add a light, one-time
 entrance animation on first paint — no scroll-triggered JS, no libraries.

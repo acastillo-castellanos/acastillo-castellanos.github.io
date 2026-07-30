@@ -16,7 +16,7 @@ const { Content } = await render(post);
 
 <Base title={post.data.title} description={post.data.description}>
   <article>
-    <h1 class="text-3xl font-semibold tracking-tight">{post.data.title}</h1>
+    <h1 class="animate-in text-3xl font-semibold tracking-tight">{post.data.title}</h1>
     <p class="text-ink-muted mt-1 text-sm">
       <time datetime={post.data.date.toISOString()}>
         {post.data.date.toISOString().slice(0, 10)}
