@@ -216,7 +216,7 @@ Commit: `feat: home hero media loop`
 
 ---
 
-## Phase D6 — Security hardening (independent of styling; can run anytime)
+## Phase D6 — Security hardening (independent of styling; can run anytime) ✅ done
 
 The site is static — no forms, no auth, no user input — so the realistic
 threats are **supply chain** (npm packages, GitHub Actions) and **account
