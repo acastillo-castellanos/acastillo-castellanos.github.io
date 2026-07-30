@@ -1,28 +1,71 @@
 ---
 import Base from '../layouts/Base.astro';
 
-// TODO(andres): fill in your real research projects below. `link` and
-// `funding` are optional — omit the key entirely (not just leave it empty)
-// to hide that part of the entry. Add/remove objects freely.
+// `link` and `funding` are optional — omit the key entirely (not just
+// leave it empty) to hide that part of the entry.
 const currentProjects = [
   {
-    title: 'Project title',
-    period: '2023–present',
-    description: 'One or two sentences describing the project and your role.',
-    funding: 'Funding body / grant name',
-    link: 'https://example.org',
+    id: 'rt-immiscible',
+    title: 'Turbulent Rayleigh–Taylor instability in immiscible fluids',
+    period: '2026–present',
+    description:
+      'Direct numerical simulations of the Rayleigh–Taylor instability between two immiscible ' +
+      'fluids reaching a fully turbulent regime. The distorted interface fragments and undergoes ' +
+      'a cascade of successive break-ups down to the Hinze scale, so that surface energy acts as ' +
+      'a pseudo-dissipative sink for turbulent kinetic energy. We study how this emulsification ' +
+      'affects the approach to self-similarity and the growth parameter α, in contrast with the ' +
+      'miscible regime. These high-fidelity simulations also feed a database for training ' +
+      'machine-learning models, including generative diffusion models.',
+    funding: 'LRC MESO (CEA – ENS Paris-Saclay)',
   },
 ];
 
 const completedProjects = [
   {
-    title: 'Project title',
-    period: '2020–2023',
-    description: 'One or two sentences describing the project and your role.',
-    funding: 'Funding body / grant name',
-    link: undefined,
+    title: 'VIBMIX: frozen waves in the inertial regime',
+    period: '2023–2025',
+    description:
+      'Numerical simulations and analysis of experiments on interfaces subjected to strong ' +
+      'time-periodic horizontal accelerations, which develop striking patterns known as frozen ' +
+      'waves; experiments were carried out at the CEA-CESTA in 2023. In the inertial regime, where ' +
+      'viscous and capillary effects become negligible, the frozen-wave amplitude scales with ' +
+      'the square of the forcing velocity, consistent with vibro-equilibria theory extended to ' +
+      'immiscible fluids with large density contrasts.',
+    funding: 'LRC MESO (CEA – ENS Paris-Saclay)',
+    link: 'https://doi.org/10.1017/jfm.2025.10454',
+  },
+  {
+    title: 'FARAMIX2: mixing induced by Faraday surface waves',
+    period: '2022–2025',
+    description:
+      'Numerical simulations and analysis of experimental data on Faraday waves at the surface ' +
+      'of two miscible fluids with a small density contrast, performed in 2019 at the ' +
+      'Gaztransport & Technigaz® (GTT) Motion Analysis and Testing Laboratory. Wave breaking ' +
+      'entrains bubbles and light ' +
+      'fluid into the denser layer, progressively eroding the interface and detuning it from the ' +
+      'forcing, which leads to a non-monotonic mixing rate. A one-dimensional model based on a ' +
+      'turbulent diffusivity reproduces the long-term behaviour.',
+    funding: 'LRC MESO (CEA – ENS Paris-Saclay)',
+    link: 'https://arxiv.org/abs/2512.15536',
+  },
+  {
+    title: 'TWIN-HELIX: dynamics and instabilities of helical vortex pairs',
+    period: '2019–2022',
+    description:
+      'Theory, simulations, and experiments on the dynamics and instabilities of helical vortex ' +
+      'pairs, relevant to rotor wakes from helicopters and wind turbines. We derived general ' +
+      'solutions and long-wave instabilities of co-rotating vortex pairs, and showed how rotor ' +
+      'imperfections — asymmetric blade lengths or variable rotation speeds — trigger ' +
+      'instabilities that promote wake decay.',
+    funding: 'ANR TWIN-HELIX (ANR-17-CE06-0018), coordinated by Thomas Leweke (CNRS – IRPHE)',
   },
 ];
+
+// The most recent completed projects stay visible; older ones collapse
+// behind a native <details> disclosure (works without JS).
+const visibleCount = 2;
+const recentCompleted = completedProjects.slice(0, visibleCount);
+const earlierCompleted = completedProjects.slice(visibleCount);
 ---
 
 <Base title="Projects">
@@ -32,7 +75,7 @@ const completedProjects = [
   <ul class="mt-3 space-y-6 pl-0">
     {
       currentProjects.map((project) => (
-        <li class="list-none">
+        <li class="list-none" id={project.id}>
           <div class="flex flex-wrap items-baseline gap-x-3">
             <span class="text-ink font-medium">{project.title}</span>
             <span class="text-ink-muted text-sm">{project.period}</span>
@@ -52,7 +95,7 @@ const completedProjects = [
   <h2 class="text-ink mt-12 text-xl font-semibold tracking-tight">Completed projects</h2>
   <ul class="mt-3 space-y-6 pl-0">
     {
-      completedProjects.map((project) => (
+      recentCompleted.map((project) => (
         <li class="list-none">
           <div class="flex flex-wrap items-baseline gap-x-3">
             <span class="text-ink font-medium">{project.title}</span>
@@ -69,4 +112,32 @@ const completedProjects = [
       ))
     }
   </ul>
+
+  {
+    earlierCompleted.length > 0 && (
+      <details class="group mt-6">
+        <summary class="text-accent cursor-pointer list-none text-sm select-none">
+          <span class="group-open:hidden">Show earlier projects ({earlierCompleted.length})</span>
+          <span class="hidden group-open:inline">Hide earlier projects</span>
+        </summary>
+        <ul class="mt-6 space-y-6 pl-0">
+          {earlierCompleted.map((project) => (
+            <li class="list-none">
+              <div class="flex flex-wrap items-baseline gap-x-3">
+                <span class="text-ink font-medium">{project.title}</span>
+                <span class="text-ink-muted text-sm">{project.period}</span>
+              </div>
+              <p class="text-ink-muted mt-1 max-w-prose">{project.description}</p>
+              {project.funding && <p class="text-ink-muted mt-1 text-sm">{project.funding}</p>}
+              {project.link && (
+                <a href={project.link} class="text-accent mt-1 inline-block text-sm">
+                  {project.link}
+                </a>
+              )}
+            </li>
+          ))}
+        </ul>
+      </details>
+    )
+  }
 </Base>

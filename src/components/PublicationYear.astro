@@ -1,0 +1,56 @@
+---
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+  year: number;
+  pubs: CollectionEntry<'publications'>[];
+}
+
+const AUTHOR_NAME = 'A. Castillo-Castellanos';
+
+const { year, pubs } = Astro.props;
+---
+
+<section class="mt-10">
+  <h2 class="text-ink text-lg font-semibold tracking-tight">{year}</h2>
+  <ul class="mt-3 space-y-4 pl-0">
+    {
+      pubs.map(({ data }) => (
+        <li class="list-none pl-6 -indent-6">
+          {data.authors.map((author, i) => (
+            <>
+              {i > 0 && ', '}
+              {author === AUTHOR_NAME ? <strong>{author}</strong> : author}
+            </>
+          ))}
+          {' '}({data.year}). {data.title}.{' '}
+          <em>{data.journal}</em>.
+          {data.doi && (
+            <>
+              {' '}
+              <a href={`https://doi.org/${data.doi}`} class="text-accent text-sm">
+                DOI
+              </a>
+            </>
+          )}
+          {data.pdf && (
+            <>
+              {' '}
+              <a href={data.pdf} class="text-accent text-sm">
+                PDF
+              </a>
+            </>
+          )}
+          {data.hal && (
+            <>
+              {' '}
+              <a href={data.hal} class="text-accent text-sm">
+                HAL
+              </a>
+            </>
+          )}
+        </li>
+      ))
+    }
+  </ul>
+</section>
