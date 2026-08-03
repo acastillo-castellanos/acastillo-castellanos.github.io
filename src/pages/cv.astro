@@ -1,6 +1,10 @@
 ---
 import Base from '../layouts/Base.astro';
 import { SITE } from '../data/site';
+import { withBase } from '../utils/url';
+
+const downloadIcon =
+  'M12 3v10.59l3.3-3.3 1.4 1.42L12 17.4l-4.7-4.7 1.4-1.41 3.3 3.3V3h2zM5 19h14v2H5v-2z';
 
 const experience = [
   {
@@ -65,6 +69,19 @@ const education = [
   <p class="text-ink-muted mt-3">
     Andrés Castillo-Castellanos · Research Scientist in Fluid Mechanics<br />
     {SITE.email} · {SITE.location}
+  </p>
+
+  <p class="mt-4 print:hidden">
+    <a
+      href={withBase('/cv_castillo_2026.pdf')}
+      class="text-ink-muted hover:text-accent inline-flex items-center gap-2 no-underline"
+      download
+    >
+      <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true">
+        <path d={downloadIcon} />
+      </svg>
+      Download CV (PDF)
+    </a>
   </p>
 
   <h2 class="border-rule text-ink mt-10 border-b pb-1 text-lg font-semibold tracking-tight">
