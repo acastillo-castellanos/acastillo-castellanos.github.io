@@ -2,7 +2,7 @@
 title: 'Parametric instability of the interface between two fluids, pt. 1'
 date: 2026-08-11
 description: 'Viscous linear stability analysis of Faraday waves to reproduce the results of Kumar & Tuckerman (1994): full hydrodynamic system (FHS).'
-tags: ['linear-stability', 'faraday', 'floquet']
+tags: ['linear-stability', 'faraday-waves', 'floquet-analysis']
 draft: false
 ---
 
@@ -15,9 +15,10 @@ it to a Floquet problem.
 The goal of this series is to reproduce their results and implement the
 stability analysis in Python. This first part is the theory: from the
 dimensional Navier–Stokes equations down to the Floquet system that has to be
-solved. The second describes the matrix eigenvalue problem for the forcing
-amplitude solved by Kumar & Tuckerman, while the third presents an alternative
-approach using [Dedalus](https://dedalus-project.org/).
+solved. [The second](../2026-08-faraday-kt94-eigenvalue-problem/) describes the
+matrix eigenvalue problem for the forcing amplitude solved by Kumar & Tuckerman,
+while [the third](../2026-08-faraday-dedalus/) presents an alternative approach
+using [Dedalus](https://dedalus-project.org/).
 
 ## Physical system and dimensional parameters
 
