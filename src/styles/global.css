@@ -102,8 +102,24 @@ a:focus-visible {
   --tw-prose-td-borders: var(--rule);
 }
 
+/* KaTeX renders at the prose base size, which leaves subscripts (0.7em) and
+   nested subscripts (0.5em) too small to read. Bump the math up and give the
+   sub/superscripts a floor so they stay legible. */
+.prose-custom .katex {
+  font-size: 1.18em;
+  line-height: 1.35;
+}
+
+.prose-custom .katex .mtight {
+  font-size: 0.8em;
+}
+
 .katex-display {
   overflow-x: auto;
   overflow-y: hidden;
   margin-block: 1.5em;
+}
+
+.prose-custom .katex-display > .katex {
+  font-size: 1.18em;
 }
