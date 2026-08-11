@@ -1,7 +1,7 @@
 ---
 title: 'Parametric instability of the interface between two fluids, pt. 1'
 date: 2026-08-11
-description: 'We revisit the work of Kumar & Tuckerman (1994).'
+description: 'Viscous linear stability analysis of Faraday waves to reproduce the results of Kumar & Tuckerman (1994): full hydrodynamic system (FHS).'
 tags: ['linear-stability', 'faraday', 'floquet']
 draft: false
 ---
