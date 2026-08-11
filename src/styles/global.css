@@ -123,3 +123,11 @@ a:focus-visible {
 .prose-custom .katex-display > .katex {
   font-size: 1.18em;
 }
+
+/* Plots exported from matplotlib carry an opaque white canvas, which reads as a
+   harsh block against the dark theme. Frame them so they look deliberate. */
+.prose-custom img {
+  border: 1px solid var(--rule);
+  border-radius: 0.5rem;
+  background: #fff;
+}
