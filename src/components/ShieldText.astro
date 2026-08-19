@@ -1,0 +1,39 @@
+---
+import { encodeSegments, m15en } from '@shieldfont/core';
+import '../styles/shieldfont.css';
+
+interface Props {
+  text?: string;
+  as?: string;
+  class?: string;
+  highlight?: boolean;
+}
+
+const { text, as: Tag = 'span', class: className = '', highlight = true } = Astro.props;
+
+let rawText = text;
+if (!rawText && Astro.slots.has('default')) {
+  rawText = await Astro.slots.render('default');
+}
+
+const plainText = (rawText || '').replace(/<[^>]*>/g, '');
+const segments = encodeSegments(plainText, m15en);
+---
+
+<Tag class:list={['shield-text', className]} data-shield-encoded>
+  {
+    segments.map((seg) => {
+      if (seg.swapped && highlight) {
+        return (
+          <span
+            class="border-b-2 border-dashed border-accent px-0.5 rounded"
+            title={`HTML Decoy: "${seg.encoded}" -> Renders: "${seg.original}"`}
+          >
+            {seg.encoded}
+          </span>
+        );
+      }
+      return seg.encoded;
+    })
+  }
+</Tag>

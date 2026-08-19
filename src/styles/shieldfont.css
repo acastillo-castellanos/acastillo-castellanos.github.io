@@ -1,0 +1,20 @@
+@font-face {
+  font-family: 'Optik Max';
+  src: url('/fonts/shieldfont/optik-m.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+  font-display: block;
+}
+
+@font-face {
+  font-family: 'Optik Max';
+  src: url('/fonts/shieldfont/optik-m-italic.woff2') format('woff2');
+  font-weight: normal;
+  font-style: italic;
+  font-display: block;
+}
+
+.shield-text,
+.tk9-m {
+  font-family: 'Optik Max', sans-serif;
+}
