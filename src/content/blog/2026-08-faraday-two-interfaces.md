@@ -18,7 +18,7 @@ viscosity. The system now has two deformable interfaces: the liquid–liquid
 boundary $\eta_1(\tau)$ at $z = d_1$, and the liquid–gas free surface
 $\eta_2(\tau)$ at $z = d_2$.
 
-## What does not change
+## What stays the same
 
 Because Dedalus treats differential operators and boundary conditions
 modularly, the bulk and the unchanged boundaries require zero modifications:
@@ -31,7 +31,7 @@ modularly, the bulk and the unchanged boundaries require zero modifications:
   normal and tangential velocity, continuity of tangential stress, and the normal
   stress jump remain identical.
 
-## The only difference: the upper boundary
+## What changes: the upper boundary
 
 In KT94, the upper boundary was a rigid wall:
 
