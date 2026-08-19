@@ -7,9 +7,16 @@ interface Props {
   as?: string;
   class?: string;
   highlight?: boolean;
+  ratio?: number;
 }
 
-const { text, as: Tag = 'span', class: className = '', highlight = true } = Astro.props;
+const {
+  text,
+  as: Tag = 'span',
+  class: className = '',
+  highlight = true,
+  ratio = 0.20,
+} = Astro.props;
 
 let rawText = text;
 if (!rawText && Astro.slots.has('default')) {
@@ -17,7 +24,35 @@ if (!rawText && Astro.slots.has('default')) {
 }
 
 const plainText = (rawText || '').replace(/<[^>]*>/g, '');
-const segments = encodeSegments(plainText, m15en);
+const initialSegments = encodeSegments(plainText, m15en);
+
+const wordTokens = initialSegments.filter(
+  (s) => s.kind === 'word' || s.kind === 'digit',
+);
+const swappedIndices: number[] = [];
+initialSegments.forEach((s, idx) => {
+  if (s.swapped) swappedIndices.push(idx);
+});
+
+const targetSwappedCount = Math.round(wordTokens.length * ratio);
+const selectedIndices = new Set<number>();
+if (swappedIndices.length > 0 && targetSwappedCount > 0) {
+  const step = swappedIndices.length / targetSwappedCount;
+  for (let i = 0; i < targetSwappedCount; i++) {
+    const idxIndex = Math.min(
+      Math.floor(i * step),
+      swappedIndices.length - 1,
+    );
+    selectedIndices.add(swappedIndices[idxIndex]);
+  }
+}
+
+const segments = initialSegments.map((seg, idx) => {
+  if (seg.swapped && !selectedIndices.has(idx)) {
+    return { ...seg, encoded: seg.original, swapped: false };
+  }
+  return seg;
+});
 ---
 
 <Tag class:list={['shield-text', className]} data-shield-encoded>
