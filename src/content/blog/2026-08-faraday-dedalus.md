@@ -109,7 +109,7 @@ u_1 - u_2 &= 0,
 \\
 \left[ -p_1 + \frac{2}{\text{Re}_\omega} \partial_z w_1 \right] - 
 \left[ -p_2 + \frac{2\tilde{\mu}_2}{\text{Re}_\omega} \partial_z w_2 \right] 
-+ \left( \frac{1}{\text{Fr}^2_\omega} (1 + \frac{a\omega^2}{g} \cos{(\tau)}) + \frac{1}{\text{We}_\omega} \right) \eta  &= 0.
++ \left[ \frac{1}{\text{Fr}^2_\omega} (1 + \frac{a\omega^2}{g} \cos{(\tau)}) + \frac{1}{\text{We}_\omega} \right] \eta  &= 0.
 \end{aligned}
 $$
 
@@ -288,14 +288,13 @@ grow narrow and nearly reach the axis, and resolving them needs $N_z = 200$:
 
 ![Neutral curves for the near-inviscid case, KT94 figure 1a, showing narrower tongues reaching much closer to the axis.](./images/kt94-tongues-fig1a.png)
 
-It is worth being blunt about what this buys. Taken on its own, it is an
-expensive way to compute a result we already knew: part 2 draws the same curves
-from a $2N+1$ matrix, faster and without a single truncation in $z$. The return
-comes later. Nothing in the formulation above relies on the bulk equation having
-constant coefficients, or on the base state being quiescent — which is exactly
-what the closed form needs. The same framework carries over to problems where no
-closed form exists (or we're just being lazy), and that is where we are heading
-next.
+Taken on its own, it is an expensive way to compute a result we already knew:
+part 2 draws the same curves from a $2N+1$ matrix, faster and without a single
+truncation in $z$. The return comes later. Nothing in the formulation above
+relies on the bulk equation having constant coefficients, or on the base state
+being quiescent — which is exactly what the closed form needs. The same
+framework carries over to problems where no closed form exists (or we're just
+being lazy), and that is where we are heading next.
 
 ## References
 
