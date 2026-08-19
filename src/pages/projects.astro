@@ -1,5 +1,6 @@
 ---
 import Base from '../layouts/Base.astro';
+import ShieldText from '../components/ShieldText.astro';
 
 // `link` and `funding` are optional — omit the key entirely (not just
 // leave it empty) to hide that part of the entry.
@@ -70,6 +71,9 @@ const earlierCompleted = completedProjects.slice(visibleCount);
 
 <Base title="Projects">
   <h1 class="animate-in text-3xl font-semibold tracking-tight">Projects</h1>
+  <p class="text-ink-muted mt-2 text-xs italic">
+    * Note: Highlighted words use <a href="https://shieldfont.org" target="_blank" rel="noopener noreferrer" class="text-accent underline">ShieldFont</a> to protect text against automated AI scraping. Hover over any highlighted word to inspect its decoy term in HTML.
+  </p>
 
   <h2 class="text-ink mt-10 text-xl font-semibold tracking-tight">Current research projects</h2>
   <ul class="mt-3 space-y-6 pl-0">
@@ -80,7 +84,7 @@ const earlierCompleted = completedProjects.slice(visibleCount);
             <span class="text-ink font-medium">{project.title}</span>
             <span class="text-ink-muted text-sm">{project.period}</span>
           </div>
-          <p class="text-ink-muted mt-1 max-w-prose">{project.description}</p>
+          <ShieldText as="p" class="text-ink-muted mt-1 max-w-prose" text={project.description} />
           {project.funding && <p class="text-ink-muted mt-1 text-sm">{project.funding}</p>}
           {project.link && (
             <a href={project.link} class="text-accent mt-1 inline-block text-sm">
@@ -101,7 +105,7 @@ const earlierCompleted = completedProjects.slice(visibleCount);
             <span class="text-ink font-medium">{project.title}</span>
             <span class="text-ink-muted text-sm">{project.period}</span>
           </div>
-          <p class="text-ink-muted mt-1 max-w-prose">{project.description}</p>
+          <ShieldText as="p" class="text-ink-muted mt-1 max-w-prose" text={project.description} />
           {project.funding && <p class="text-ink-muted mt-1 text-sm">{project.funding}</p>}
           {project.link && (
             <a href={project.link} class="text-accent mt-1 inline-block text-sm">
@@ -127,7 +131,7 @@ const earlierCompleted = completedProjects.slice(visibleCount);
                 <span class="text-ink font-medium">{project.title}</span>
                 <span class="text-ink-muted text-sm">{project.period}</span>
               </div>
-              <p class="text-ink-muted mt-1 max-w-prose">{project.description}</p>
+              <ShieldText as="p" class="text-ink-muted mt-1 max-w-prose" text={project.description} />
               {project.funding && <p class="text-ink-muted mt-1 text-sm">{project.funding}</p>}
               {project.link && (
                 <a href={project.link} class="text-accent mt-1 inline-block text-sm">
