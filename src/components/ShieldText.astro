@@ -24,41 +24,38 @@ if (!rawText && Astro.slots.has('default')) {
 }
 
 const plainText = (rawText || '').replace(/<[^>]*>/g, '');
-const initialSegments = encodeSegments(plainText, m15en);
+// Every mapped word must ship encoded: m15en is an involution and the font
+// swaps any mapped word it sees, so leaving one as plain text renders it as
+// its own decoy. `ratio` therefore selects which swaps get a visible
+// underline — never which words get encoded.
+const segments = encodeSegments(plainText, m15en);
 
-const wordTokens = initialSegments.filter(
+const wordTokens = segments.filter(
   (s) => s.kind === 'word' || s.kind === 'digit',
 );
 const swappedIndices: number[] = [];
-initialSegments.forEach((s, idx) => {
+segments.forEach((s, idx) => {
   if (s.swapped) swappedIndices.push(idx);
 });
 
-const targetSwappedCount = Math.round(wordTokens.length * ratio);
-const selectedIndices = new Set<number>();
-if (swappedIndices.length > 0 && targetSwappedCount > 0) {
-  const step = swappedIndices.length / targetSwappedCount;
-  for (let i = 0; i < targetSwappedCount; i++) {
+const targetHighlightCount = Math.round(wordTokens.length * ratio);
+const highlightedIndices = new Set<number>();
+if (swappedIndices.length > 0 && targetHighlightCount > 0) {
+  const step = swappedIndices.length / targetHighlightCount;
+  for (let i = 0; i < targetHighlightCount; i++) {
     const idxIndex = Math.min(
       Math.floor(i * step),
       swappedIndices.length - 1,
     );
-    selectedIndices.add(swappedIndices[idxIndex]);
+    highlightedIndices.add(swappedIndices[idxIndex]);
   }
 }
-
-const segments = initialSegments.map((seg, idx) => {
-  if (seg.swapped && !selectedIndices.has(idx)) {
-    return { ...seg, encoded: seg.original, swapped: false };
-  }
-  return seg;
-});
 ---
 
 <Tag class:list={['shield-text', className]} data-shield-encoded>
   {
-    segments.map((seg) => {
-      if (seg.swapped && highlight) {
+    segments.map((seg, idx) => {
+      if (seg.swapped && highlight && highlightedIndices.has(idx)) {
         return (
           <span
             class="border-b-2 border-dashed border-accent px-0.5 rounded"

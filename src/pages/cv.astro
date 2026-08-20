@@ -2,7 +2,6 @@
 import Base from '../layouts/Base.astro';
 import { SITE } from '../data/site';
 import { withBase } from '../utils/url';
-import ShieldText from '../components/ShieldText.astro';
 
 const downloadIcon =
   'M12 3v10.59l3.3-3.3 1.4 1.42L12 17.4l-4.7-4.7 1.4-1.41 3.3 3.3V3h2zM5 19h14v2H5v-2z';
@@ -88,13 +87,12 @@ const education = [
   <h2 class="border-rule text-ink mt-10 border-b pb-1 text-lg font-semibold tracking-tight">
     Profile
   </h2>
-  <ShieldText
-    as="p"
-    class="mt-3 max-w-prose"
-    text="Research scientist in fluid mechanics with ample experience studying waves, hydrodynamic instabilities, and turbulence. I combine high-performance simulations, laboratory experiments, and simple models to understand how flows mix, destabilise, and organise — working closely with experimentalists and national-lab partners (CNRS, CEA, CNES)."
-  />
-  <p class="text-ink-muted mt-2 text-xs italic">
-    * Note: Highlighted words use <a href="https://shieldfont.org" target="_blank" rel="noopener noreferrer" class="text-accent underline">ShieldFont</a> to protect text against automated AI scraping. Hover over any highlighted word to inspect its decoy term in HTML.
+  <p class="mt-3 max-w-prose">
+    Research scientist in fluid mechanics with ample experience studying waves,
+    hydrodynamic instabilities, and turbulence. I combine high-performance
+    simulations, laboratory experiments, and simple models to understand how
+    flows mix, destabilise, and organise — working closely with
+    experimentalists and national-lab partners (CNRS, CEA, CNES).
   </p>
 
   <h2 class="border-rule text-ink mt-10 border-b pb-1 text-lg font-semibold tracking-tight">
