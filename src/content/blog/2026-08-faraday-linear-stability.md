@@ -17,7 +17,7 @@ stability analysis in Python. This first part is the theory: from the
 dimensional Navier–Stokes equations down to the Floquet system that has to be
 solved. [The second](../2026-08-faraday-kt94-eigenvalue-problem/) describes the
 matrix eigenvalue problem for the forcing amplitude solved by Kumar & Tuckerman,
-while [the third](../2026-08-faraday-dedalus/) presents an alternative approach
+while [the third](../2026-08-faraday-dedalus/) presents a solution approach
 using [Dedalus](https://dedalus-project.org/).
 
 ## Physical system and dimensional parameters
@@ -103,20 +103,14 @@ $$
 \end{aligned}
 $$
 
-Note that the forcing has disappeared from the perturbation equations: it
-survives only in the base pressure gradient, and will re-enter through the
-normal stress balance at the interface. That is the whole mechanism of the
-parametric instability.
-
 ### Expansion in normal modes
 
-Two properties of the linearised system let us separate variables in one go.
-Horizontally the problem is uniform, so its normal modes are spatial Fourier
-modes $\exp{\lbrace i\boldsymbol{k}\cdot\boldsymbol{x} \rbrace}$ (where
-$\boldsymbol{k} = k_x \boldsymbol{e}_x + k_y \boldsymbol{e}_y$ is the horizontal
-wavenumber). In time the coefficients are $T$-periodic with $\omega = 2\pi/T$,
-so its normal modes are temporal Fourier modes $\exp{\lbrace \sigma_n t
-\rbrace}$ (where $\sigma_n$ is the complex Floquet exponent). Combining both 
+The problem is uniform in the horizontal direction, so its normal modes are
+**spatial** Fourier modes $\exp{\lbrace i\boldsymbol{k}\cdot\boldsymbol{x} \rbrace}$
+(where $\boldsymbol{k} = k_x \boldsymbol{e}_x + k_y \boldsymbol{e}_y$ is the
+horizontal wavenumber). Coefficients are $T$-periodic with $\omega = 2\pi/T$, so
+its normal modes are **temporal** Fourier modes $\exp{\lbrace \sigma_n t \rbrace}$
+(where $\sigma_n$ is the complex Floquet exponent). Combining both 
 
 $$
 \begin{aligned}
@@ -195,9 +189,7 @@ $$
 
 ### Conditions at the interface
 
-The interface conditions need one extra step. Every term transcribes directly
-except the forcing, where the product of $\cos(\omega t)$ with the temporal
-series shifts harmonics by one,
+Coupling enters through the forcing, 
 
 $$ 
 \begin{aligned}
@@ -208,9 +200,8 @@ $$
 
 so that harmonic $n$ picks up its neighbours $n \pm 1$.
 
-Four of the five conditions are statements that some quantity is continuous
-across the interface, so it is worth writing $\Delta[\,\cdot\,]$ for the jump
-from the lower to the upper layer, evaluated at $z = 0$. For instance,
+As in KT94, we define $\Delta[\,\cdot\,]$ as the jump from the lower to the
+upper layer, evaluated at $z = 0$. For instance,
 
 $$ 
 \begin{aligned}
@@ -234,7 +225,7 @@ $$
   \left( \rho\sigma_n - \mu (\partial_{zz} - 3k^2) \right) \partial_z w_{n} 
 \right]
 &= \Delta[\rho] g k^2 \left[ \left( 1 + \frac{\gamma k^2}{g\Delta[\rho]} \right) \zeta_n 
-+ \frac{a \omega^2}{2g} (\zeta_{n-1} + \zeta_{n+1}) \right]
++ \frac{a \omega^2}{g} \frac{(\zeta_{n-1} + \zeta_{n+1})}{2} \right]
 \end{aligned}
 $$
 

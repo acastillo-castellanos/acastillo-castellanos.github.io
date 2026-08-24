@@ -6,15 +6,12 @@ tags: ['linear-stability', 'faraday-waves', 'floquet-analysis']
 draft: false
 ---
 
-[Part 1](../2026-08-faraday-linear-stability/) ended with the full hydrodynamic
-system (FHS): a fourth-order ODE in each layer, coupled at the interface, for
-each temporal harmonic $n$. Harmonics are not independent since the forcing ties
-$n$ to $n \pm 1$.
-
-The approach used by [Kumar & Tuckerman (1994)](#references), exploits the fact
-that the bulk equation has constant coefficients and can therefore be solved in
-closed form. Fixing the integration constants leaves a single scalar equation
-per harmonic, which is used to write a matrix eigenvalue problem.
+[Part 1](../2026-08-faraday-linear-stability/) ended with writing full
+hydrodynamic system (FHS), for each temporal harmonic $n$. These harmonics are
+not independent since the forcing ties $n$ to $n \pm 1$. The approach used by
+[Kumar & Tuckerman (1994)](#references), solves the bulk equation in closed
+form, leaving a single scalar equation per harmonic, treated as a matrix
+eigenvalue problem.
 
 ## Harmonic and subharmonic responses
 
@@ -28,13 +25,11 @@ $$
 $$
 
 Because $\alpha$ is defined only modulo $\omega$, it can be restricted to $0 \le
-\alpha < \omega$. The Floquet multipliers are eigenvalues of a real map, so they
-are real or come in complex-conjugate pairs. This leaves two cases of interest:
+\alpha < \omega$. The Floquet multipliers must be real or come in
+complex-conjugate pairs. We are interested in two cases,
 
-- $\alpha = 0$, a **harmonic** response: the interface repeats every forcing
-  period $T$.
-- $\alpha = \omega/2$, a **subharmonic** response: the interface repeats every
-  $2T$, oscillating at half the forcing frequency.
+- $\alpha = 0$, corresponding to the **harmonic** response.
+- $\alpha = \omega/2$, corresponding to the **subharmonic** response.
 
 Both endpoints impose a reality condition linking negative to positive
 harmonics,
@@ -50,7 +45,7 @@ and identically for $w_{\beta n}$. Only $n \ge 0$ need therefore be carried.
 
 ## Solving each layer in closed form
 
-The bulk equation from part 1,
+The bulk equation from [part 1](../2026-08-faraday-linear-stability/),
 
 $$
 \begin{aligned}
@@ -58,8 +53,8 @@ $$
 \end{aligned}
 $$
 
-has constant coefficients in $z$. Its characteristic roots are $\pm k$, from the
-right-hand factor, and $\pm q_{\beta n}$ from the left, where
+has constant coefficients in $z$, where the characteristic roots are $\pm k$ and
+$\pm q_{\beta n}$, where
 
 $$
 \begin{aligned}
@@ -68,7 +63,7 @@ q_{\beta n}^2 = k^2 + \frac{\sigma_n}{\nu_\beta},
 $$
 
 taking the root with positive real part. The general solution in layer $\beta$
-is therefore
+reads
 
 $$
 \begin{aligned}
@@ -76,18 +71,18 @@ w_{\beta n}(z) = a_{\beta n} e^{k z} + b_{\beta n} e^{-k z} + c_{\beta n} e^{q_{
 \end{aligned}
 $$
 
-Two special cases collapse this. For an inviscid layer ($\nu_\beta = 0$) the
-$q$-roots disappear and only $e^{\pm k z}$ survive, which is the inviscid
-problem solved by [Benjamin & Ursell (1954)](#references). When $\sigma_n = 0$ the two pairs of roots coincide at $\pm k$, and the
-degenerate solutions $z e^{\pm k z}$ take the place of $e^{\pm q_{\beta n} z}$.
+For an inviscid layer ($\nu_\beta = 0$) the $q$-roots disappear and only $e^{\pm
+k z}$ survive, which is the inviscid problem solved by [Benjamin & Ursell
+(1954)](#references). When $\sigma_n = 0$ the two pairs of roots coincide at
+$\pm k$, and the degenerate solutions $z e^{\pm k z}$ take the place of $e^{\pm
+q_{\beta n} z}$.
 
 ## Matching at the interface
 
-Each layer brings four constants, so eight per harmonic. The FHS supplies
-exactly eight conditions once the normal stress balance is set aside: four at the
-rigid plates, three matching conditions at the interface, and the kinematic
-condition. Writing $\boldsymbol{c}_n = (a_{1n}, b_{1n}, c_{1n}, d_{1n}, a_{2n},
-b_{2n}, c_{2n}, d_{2n})^{\mathsf{T}}$ and abbreviating
+The system above gives us four constants per layer, while the FHS (excluding the
+normal stress) provides eight equations. Writing $\boldsymbol{c}_n = (a_{1n},
+b_{1n}, c_{1n}, d_{1n}, a_{2n}, b_{2n}, c_{2n}, d_{2n})^{\mathsf{T}}$ and
+introducing
 
 $$
 \begin{aligned}
@@ -95,7 +90,7 @@ E_\beta^{\pm} \equiv e^{\pm k h_\beta}, \qquad Q_\beta^{\pm} \equiv e^{\pm q_{\b
 \end{aligned}
 $$
 
-the eight conditions read $\mathsf{M}_n \boldsymbol{c}_n = \sigma_n \zeta_n
+the equation system reads $\mathsf{M}_n \boldsymbol{c}_n = \sigma_n \zeta_n
 \boldsymbol{e}_3$, with
 
 $$
@@ -115,17 +110,8 @@ k & -k & q_1 & -q_1 & -k & k & -q_2 & q_2 \\
 $$
 
 where $\kappa_\beta \equiv k^2 + q_{\beta n}^2$ and the harmonic index has been
-dropped from $q_{\beta n}$ inside the matrix. The rows are, in order: 
-- no penetration and no slip at $z = -h_1$; 
-- the kinematic condition $w_{1n}(0) = \sigma_n \zeta_n$ 
-- continuity of normal velocity, of tangential velocity, and of
-tangential stress at $z = 0$
-- and no penetration and no slip at $z = h_2$. 
-The interface sits at $z = 0$, which is why the exponentials collapse to $1$ in rows
-three to six.
-
-Solving once with $\zeta_n = 1$ gives every coefficient, and hence $w_{\beta
-n}(z)$, becomes a known multiple of the interface amplitude.
+dropped from $q_{\beta n}$ inside the matrix. Solving once with $\zeta_n = 1$
+gives every coefficient.
 
 ## Normal stress balance
 
@@ -140,10 +126,8 @@ $$
 \end{aligned}
 $$
 
-Every term on the left is now a known multiple of $\zeta_n$, since the previous
-step gave $w_{\beta n}$ in terms of $\zeta_n$ and the derivatives of
-exponentials are immediate. Collecting these terms into a single complex
-coefficient $A_n$ the entire FHS reduces to
+Every term on the left is a known function of $\zeta_n$. Collecting these terms
+into a single complex coefficient $A_n$ the entire FHS reduces to
 
 $$
 \begin{aligned}
@@ -151,26 +135,30 @@ A_n \zeta_n = a \left( \zeta_{n+1} + \zeta_{n-1} \right), \qquad n \ge 0.
 \end{aligned}
 $$
 
-where $A_n$ depends on $k$, on the fluid properties, and on $\sigma_n$ but not
-on the forcing amplitude $a$. 
-
 ## A matrix eigenvalue problem for the forcing amplitude
 
-The reality conditions close the system at $n = 0$. In the harmonic case
-$\zeta_{-1} = \zeta_1^{*}$, and in the subharmonic case $\zeta_{-1} =
-\zeta_0^{*}$, so
+The reality conditions close the system at $n = 0$. 
 
+- In the harmonic case $\zeta_{-1} = \zeta_1^{*}$
 $$
 \begin{aligned}
-A_0 \zeta_0 &= 2a \operatorname{Re}(\zeta_1) && \text{(harmonic)}, \\
-A_0 \zeta_0 &= a \left( \zeta_1 + \zeta_0^{*} \right) && \text{(subharmonic)},
+A_0 \zeta_0 &= 2a \operatorname{Re}(\zeta_1)
 \end{aligned}
 $$
 
-while $A_n \zeta_n = a(\zeta_{n+1} + \zeta_{n-1})$ for $n \ge 1$. Because
-complex conjugation is not complex-linear, these are split into real and
-imaginary parts and truncated at $n \le N$, giving a real generalised eigenvalue
-problem
+- and in the subharmonic case $\zeta_{-1} = \zeta_0^{*}$, so
+
+$$
+\begin{aligned}
+A_0 \zeta_0 &= a \left( \zeta_1 + \zeta_0^{*} \right)
+\end{aligned}
+$$
+
+
+while $A_n \zeta_n = a(\zeta_{n+1} + \zeta_{n-1})$ for $n \ge 1$. 
+
+Splitting into real and imaginary parts and truncated at $n \le N$, gives a
+real generalised eigenvalue problem
 
 $$
 \begin{aligned}
@@ -179,8 +167,7 @@ $$
 \end{aligned}
 $$
 
-$\mathbf{A}$ is block diagonal, each harmonic contributing a $2 \times 2$
-block that represents multiplication by $A_n$,
+where $\mathbf{A}$ is a block diagonal matrix,
 
 $$
 \begin{aligned}
@@ -193,8 +180,7 @@ $$
 \end{aligned}
 $$
 
-while $\mathbf{B}$ carries the neighbour coupling and differs between the two
-cases only in its first rows:
+while $\mathbf{B}$ carries the coupling,
 
 $$
 \begin{aligned}
@@ -226,10 +212,9 @@ The harmonic case additionally forces $\zeta_0$ to be real, so its
 $\operatorname{Im}\zeta_0$ column and row drop out and the system has size $2N+1$
 rather than $2N+2$.
 
-Note that we never solve for a growth rate. Setting $\lambda = 0$ and picking
-$\alpha = 0$ or $\omega/2$ makes every $A_n$ a number, and the smallest positive
-eigenvalue is the critical amplitude $a_c(k)$. Sweeping $k$ traces the marginal
-stability tongues, subharmonic and harmonic alternating.
+Setting $\lambda = 0$ and picking $\alpha = 0$ or $\omega/2$ makes every $A_n$ a
+number, and the smallest positive eigenvalue is the critical amplitude $a_c(k)$.
+Sweeping $k$ traces the marginal stability tongues as done in KT94.
 
 ## References
 
