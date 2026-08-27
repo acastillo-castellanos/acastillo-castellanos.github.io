@@ -21,7 +21,7 @@
     "@shieldfont/font": "^0.3.5",
     "@tailwindcss/typography": "^0.5.20",
     "@tailwindcss/vite": "^4.3.3",
-    "astro": "^7.1.6",
+    "astro": "^7.2.6",
     "katex": "^0.18.1",
     "rehype-katex": "^7.0.1",
     "remark-math": "^6.0.0",
